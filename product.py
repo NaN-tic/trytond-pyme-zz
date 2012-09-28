@@ -10,25 +10,17 @@ from trytond.pool import Pool
 class Template(ModelSQL, ModelView):
     _name = 'product.template'
 
-    def create(self, values):
-        """Create product by default taxes"""
-        tax_customer = u'IVA 21%'
-        tax_supplier = u'21% IVA Soportado (operaciones corrientes)'
+    def default_account_category(self):
+        return True
 
-        values = values.copy()
-        company = Transaction().context.get('company')
+    def default_customer_taxes(self):
+        config_obj = Pool().get('account.configuration')
+        customer_tax = config_obj.browse(1).default_customer_tax
+        return [customer_tax.id]
 
-        if not values.get('customer_taxes'):
-            tax = Pool().get('account.tax').search(['name','=',tax_customer], limit=1)
-            if len(tax)>0:
-                values['customer_taxes'] = [('set', [tax[0]])]
-
-        if not values.get('supplier_taxes'):
-            tax = Pool().get('account.tax').search(['name','=',tax_supplier], limit=1)
-            if len(tax)>0:
-                values['supplier_taxes'] = [('set', [tax[0]])]
-        
-        template_id = super(Template, self).create(values)
-        return template_id
+    def default_supplier_taxes(self):
+        config_obj = Pool().get('account.configuration')
+        supplier_tax = config_obj.browse(1).default_supplier_tax
+        return [supplier_tax.id]
 
 Template()

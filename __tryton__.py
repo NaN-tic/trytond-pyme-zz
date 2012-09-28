@@ -19,6 +19,7 @@
         'country_zip_es',
     ],
     'xml': [
+        'account.xml',
     ],
     'translation': [
     ]
