@@ -13,6 +13,7 @@
     'description_ca_ES': '''PyME. Localització espanyola''',
     'description_es_ES': '''PyME. Localización española''',
     'depends': [
+        'account_code_digits',
         'account_es',
         'account_invoice',
         'country_zip_es',
