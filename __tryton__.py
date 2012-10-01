@@ -15,7 +15,7 @@
     'depends': [
         'account_code_digits',
         'account_es',
-        'account_invoice',
+        'account_invoice_cancel',
         'country_zip_es',
     ],
     'xml': [
