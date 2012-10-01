@@ -1,0 +1,11 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.configuration,default_customer_tax:"
+msgid "Default Customer Tax"
+msgstr "Impost venda per defecte"
+
+msgctxt "field:account.configuration,default_supplier_tax:"
+msgid "Default Supplier Tax"
+msgstr "Impost compra per defecte"
