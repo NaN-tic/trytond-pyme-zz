@@ -17,6 +17,7 @@
         'account_es',
         'account_invoice_cancel',
         'country_zip_es',
+        'party_bank_es',
     ],
     'xml': [
         'account.xml',
