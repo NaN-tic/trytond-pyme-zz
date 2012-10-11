@@ -5,8 +5,15 @@
 
 from setuptools import setup
 import re
+import os
+import ConfigParser
 
-info = eval(open('__tryton__.py').read())
+config = ConfigParser.ConfigParser()
+config.readfp(open('tryton.cfg'))
+info = dict(config.items('tryton'))
+for key in ('depends', 'extras_depend', 'xml'):
+    if key in info:
+        info[key] = info[key].strip().splitlines()
 major_version, minor_version, _ = info.get('version', '0.0.1').split('.', 2)
 major_version = int(major_version)
 minor_version = int(minor_version)
@@ -22,11 +29,11 @@ requires.append('trytond >= %s.%s, < %s.%s' %
 
 setup(name='trytond_pyme',
     version=info.get('version', '0.0.1'),
-    description=info.get('description', ''),
-    author=info.get('author', 'Zikzakmedia'),
-    author_email=info.get('email', 'zikzak@zikzakmedia.com'),
-    url=info.get('website', 'http://www.zikzakmedia.com'),
-    download_url="https://bitbucket.org/zikzakmedia/trytond-pyme",
+    description='Tryton module for develop template/example',
+    author='Zikzakmedia SL',
+    author_email='zikzak@zikzakmedia.com',
+    url='http://www.zikzakmedia.com',
+    download_url="https://home.zikzakmedia.com/tryton/pyme",
     package_dir={'trytond.modules.pyme': '.'},
     packages=[
         'trytond.modules.pyme',
@@ -34,7 +41,7 @@ setup(name='trytond_pyme',
     ],
     package_data={
         'trytond.modules.pyme': info.get('xml', []) \
-                + info.get('translation', []),
+            + ['tryton.cfg'],
     },
     classifiers=[
         'Development Status :: 5 - Production/Stable',

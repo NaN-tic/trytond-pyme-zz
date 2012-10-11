@@ -5,22 +5,27 @@
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.tools import safe_eval, datetime_strftime
 from trytond.transaction import Transaction
-from trytond.pool import Pool
+from trytond.pool import Pool, PoolMeta
 
-class Template(ModelSQL, ModelView):
-    _name = 'product.template'
+__all__ = ['ProductTemplate']
+__metaclass__ = PoolMeta
 
-    def default_account_category(self):
+class ProductTemplate:
+    __name__ = 'product.template'
+
+    @staticmethod
+    def default_account_category():
         return True
 
-    def default_customer_taxes(self):
-        config_obj = Pool().get('account.configuration')
-        customer_tax = config_obj.browse(1).default_customer_tax
+    @staticmethod
+    def default_customer_taxes():
+        Config = Pool().get('account.configuration')
+        customer_tax = Config(1).default_customer_tax
         return [customer_tax.id]
 
-    def default_supplier_taxes(self):
-        config_obj = Pool().get('account.configuration')
-        supplier_tax = config_obj.browse(1).default_supplier_tax
+    @staticmethod
+    def default_supplier_taxes():
+        Config = Pool().get('account.configuration')
+        supplier_tax = Config(1).default_supplier_tax
         return [supplier_tax.id]
 
-Template()
