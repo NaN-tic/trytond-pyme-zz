@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #This file is part pyme module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 
 import sys
@@ -15,6 +15,7 @@ import trytond.tests.test_tryton
 from trytond.tests.test_tryton import POOL, DB_NAME, USER, CONTEXT, test_view,\
     test_depends
 from trytond.transaction import Transaction
+
 
 class PymeTestCase(unittest.TestCase):
     '''

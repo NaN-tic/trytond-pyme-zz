@@ -8,6 +8,7 @@ from trytond.pyson import Eval
 __all__ = ['SaleConfiguration']
 __metaclass__ = PoolMeta
 
+
 class SaleConfiguration:
     'Sale Configuration'
     __name__ = 'sale.configuration'
