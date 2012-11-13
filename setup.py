@@ -34,13 +34,13 @@ setup(name='trytonzz_pyme',
     author_email='zikzak@zikzakmedia.com',
     url='http://www.zikzakmedia.com',
     download_url="https://home.zikzakmedia.com/tryton/pyme",
-    package_dir={'trytonzz.modules.pyme': '.'},
+    package_dir={'trytond.modules.pyme': '.'},
     packages=[
-        'trytonzz.modules.pyme',
-        'trytonzz.modules.pyme.tests',
+        'trytond.modules.pyme',
+        'trytond.modules.pyme.tests',
     ],
     package_data={
-        'trytonzz.modules.pyme': info.get('xml', []) \
+        'trytond.modules.pyme': info.get('xml', []) \
             + ['tryton.cfg'],
     },
     classifiers=[
@@ -63,9 +63,9 @@ setup(name='trytonzz_pyme',
     install_requires=requires,
     zip_safe=False,
     entry_points="""
-    [trytonzz.modules]
-    pyme = trytonzz.modules.pyme
+    [trytond.modules]
+    pyme = trytond.modules.pyme
     """,
     test_suite='tests',
-    test_loader='trytonzz.test_loader:Loader',
+    test_loader='trytond.test_loader:Loader',
 )
