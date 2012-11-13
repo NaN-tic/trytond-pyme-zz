@@ -27,20 +27,20 @@ for dep in info.get('depends', []):
 requires.append('trytond >= %s.%s, < %s.%s' %
         (major_version, minor_version, major_version, minor_version + 1))
 
-setup(name='trytond_pyme',
+setup(name='trytonzz_pyme',
     version=info.get('version', '0.0.1'),
     description='Tryton module for develop template/example',
     author='Zikzakmedia SL',
     author_email='zikzak@zikzakmedia.com',
     url='http://www.zikzakmedia.com',
     download_url="https://home.zikzakmedia.com/tryton/pyme",
-    package_dir={'trytond.modules.pyme': '.'},
+    package_dir={'trytonzz.modules.pyme': '.'},
     packages=[
-        'trytond.modules.pyme',
-        'trytond.modules.pyme.tests',
+        'trytonzz.modules.pyme',
+        'trytonzz.modules.pyme.tests',
     ],
     package_data={
-        'trytond.modules.pyme': info.get('xml', []) \
+        'trytonzz.modules.pyme': info.get('xml', []) \
             + ['tryton.cfg'],
     },
     classifiers=[
@@ -63,9 +63,9 @@ setup(name='trytond_pyme',
     install_requires=requires,
     zip_safe=False,
     entry_points="""
-    [trytond.modules]
-    pyme = trytond.modules.pyme
+    [trytonzz.modules]
+    pyme = trytonzz.modules.pyme
     """,
     test_suite='tests',
-    test_loader='trytond.test_loader:Loader',
+    test_loader='trytonzz.test_loader:Loader',
 )
