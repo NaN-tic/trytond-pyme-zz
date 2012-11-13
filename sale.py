@@ -12,7 +12,7 @@ class SaleConfiguration:
     'Sale Configuration'
     __name__ = 'sale.configuration'
     sale_price_list = fields.Property(fields.Many2One('product.price_list',
-            'Sale Price List', required=True,
+            'Sale Price List',
             domain=[
                 ('company', '=', Eval('context', {}).get('company')),
                 ],

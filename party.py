@@ -10,9 +10,3 @@ __metaclass__ = PoolMeta
 class Party:
     __name__ = 'party.party'
 
-    @staticmethod
-    def default_sale_price_list():
-        Config = Pool().get('sale.configuration')
-        config = Config(1)
-        if config.sale_price_list:
-            return config.sale_price_list.id
