@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- This file is part pyme module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <!-- Account Invoice. Replace tax field and put in new tab 
+        https://bugs.tryton.org/issue2492
+        -->
+        <record model="ir.ui.view" id="invoice_view_form">
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit" ref="account_invoice.invoice_view_form"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <data>
+                <xpath expr="/form/notebook/page[@id='invoice']/group[@id='taxes_amount_state_buttons']/group[@id='taxes']/field[@name='taxes']" position="replace" />
+                <xpath expr="/form/notebook" position="inside">
+                    <page string="Taxes" id="taxes">
+                        <field name="taxes" view_ids="account_invoice.invoice_tax_view_tree_sequence"/>
+                    </page>
+                </xpath>
+                </data>
+                ]]>
+            </field>
+        </record>
+    </data>
+</tryton>
