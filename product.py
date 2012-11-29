@@ -22,11 +22,17 @@ class ProductTemplate:
     def default_customer_taxes():
         Config = Pool().get('account.configuration')
         customer_tax = Config(1).default_customer_tax
-        return [customer_tax.id]
+        if customer_tax:
+            return [customer_tax.id]
+        else:
+            return []
 
     @staticmethod
     def default_supplier_taxes():
         Config = Pool().get('account.configuration')
         supplier_tax = Config(1).default_supplier_tax
-        return [supplier_tax.id]
+        if supplier_tax:
+            return [supplier_tax.id]
+        else:
+            return []
 
