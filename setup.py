@@ -27,13 +27,13 @@ for dep in info.get('depends', []):
 requires.append('trytond >= %s.%s, < %s.%s' %
         (major_version, minor_version, major_version, minor_version + 1))
 
-setup(name='trytonzz_pyme',
+setup(name='trytonspain_pyme',
     version=info.get('version', '0.0.1'),
     description='Tryton module for develop template/example',
     author='Zikzakmedia SL',
     author_email='zikzak@zikzakmedia.com',
     url='http://www.zikzakmedia.com',
-    download_url="https://home.zikzakmedia.com/tryton/pyme",
+    download_url="https://bitbucket.org/trytonspain/trytond-pyme",
     package_dir={'trytond.modules.pyme': '.'},
     packages=[
         'trytond.modules.pyme',
