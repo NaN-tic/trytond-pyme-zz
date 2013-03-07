@@ -11,8 +11,8 @@ Valores por defecto
 Este módulo añade como valor por defecto de impuestos de productos el 21% de
 IVA, tanto para compras como para ventas.
 
-Módulos que dependen
-====================
+Módulos de los que depende
+==========================
 
 Instalados
 ----------
@@ -20,19 +20,19 @@ Instalados
 .. toctree::
    :maxdepth: 1
 
-    /account_code_digits/index
-    /account_invoice_cancel/index
-    /account_invoice_consecutive/index
-    /account_invoice_price_list/index
-    /country_zip_es/index
-    /electronic_mail_event/index
-    /electronic_mail_pyme/index
-    /party_bank_es/index
-    /party_bank_validation/index
-    /party_search/index
-    /purchase_payment_type/index
-    /sale_margin/index
-    /sale_payment_type/index
+   /account_code_digits/index
+   /account_invoice_cancel/index
+   /account_invoice_consecutive/index
+   /account_invoice_price_list/index
+   /country_zip_es/index
+   /electronic_mail_event/index
+   /electronic_mail_pyme/index
+   /party_bank_es/index
+   /party_bank_validation/index
+   /party_search/index
+   /purchase_payment_type/index
+   /sale_margin/index
+   /sale_payment_type/index
 
 Dependencias
 ------------
@@ -50,7 +50,6 @@ Dependencias
 * `Tipos de pagos en pedidos de compra`_
 * `Margen pedido de venta`_
 * `Tipos de pagos en pedidos de venta`_
-
 
 .. _Número de dígitos en códigos de cuentas contables: ../account_code_digits/index.html
 .. _Cancelación facturas: ../account_invoice_cancel/index.html
