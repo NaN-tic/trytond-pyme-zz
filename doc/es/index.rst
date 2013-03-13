@@ -5,11 +5,14 @@ PyME
 Este módulo permite una instalación rápida de todos los módulos que una PyME
 española puede necesitar.
 
+
 Valores por defecto
 ===================
 
-Este módulo añade como valor por defecto de impuestos de productos el 21% de
-IVA, tanto para compras como para ventas.
+* Impuestos de los productos. A la configuración de contabilidad dispondremos de
+  los valores por defecto de los impuestos los productos. Cuando creamos un nuevo
+  producto, se les añadirá el impuesto de venta y de compra por defecto.
+
 
 Módulos de los que depende
 ==========================
