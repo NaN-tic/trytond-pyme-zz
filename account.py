@@ -10,9 +10,13 @@ __metaclass__ = PoolMeta
 
 class AccountConfiguration(ModelSingleton, ModelSQL, ModelView):
     __name__ = 'account.configuration'
-
     default_customer_tax = fields.Property(
-        fields.Many2One('account.tax', 'Default Customer Tax'))
+        fields.Many2One('account.tax', 'Default Customer Tax', 
+        domain=[
+            ('group.kind', 'in', ['sale', 'both']),
+            ]))
     default_supplier_tax = fields.Property(
-        fields.Many2One('account.tax', 'Default Supplier Tax'))
-
+        fields.Many2One('account.tax', 'Default Supplier Tax', 
+        domain=[
+            ('group.kind', 'in', ['purchase', 'both']),
+            ]))
