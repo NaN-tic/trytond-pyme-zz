@@ -9,3 +9,11 @@ msgstr "Impuesto venta por defecto"
 msgctxt "field:account.configuration,default_supplier_tax:"
 msgid "Default Supplier Tax"
 msgstr "Impuesto compra por defecto"
+
+msgctxt "model:ir.action,name:act_contact_mechanism_form"
+msgid "Contact Mechanism"
+msgstr "Medios de contacto"
+
+msgctxt "model:ir.ui.menu,name:menu_contact_mechanism_form"
+msgid "Contact Mechanism"
+msgstr "Medios de contacto"
