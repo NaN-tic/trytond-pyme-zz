@@ -5,6 +5,7 @@ from trytond.pool import Pool
 from .account import *
 from .bank import *
 from .product import *
+from .attachment import *
 
 
 def register():
@@ -12,4 +13,5 @@ def register():
         AccountConfiguration,
         BankAccount,
         ProductTemplate,
+        Attachment,
         module='pyme', type_='model')
