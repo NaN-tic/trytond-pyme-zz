@@ -27,10 +27,11 @@ class Attachment:
             archives.append('%s/%s' % (directory, archive))
         super(Attachment, cls).delete(attachments)
         for archive in archives:
-            os.unlink(archive)
-            try:
-                directories = ('/'.join(archive.split('/')[0:-1]),
-                    '/'.join(archive.split('/')[0:-2]))
-                map(os.rmdir, directories)
-            except OSError:
-                pass
+            if os.path.isfile(archive):
+                os.unlink(archive)
+                try:
+                    directories = ('/'.join(archive.split('/')[0:-1]),
+                        '/'.join(archive.split('/')[0:-2]))
+                    map(os.rmdir, directories)
+                except OSError:
+                    pass
