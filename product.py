@@ -15,6 +15,10 @@ class ProductTemplate:
         return True
 
     @staticmethod
+    def default_taxes_category():
+        return True
+
+    @staticmethod
     def default_customer_taxes():
         Config = Pool().get('account.configuration')
         customer_tax = Config(1).default_customer_tax
