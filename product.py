@@ -31,4 +31,3 @@ class ProductTemplate:
             return [supplier_tax.id]
         else:
             return []
-

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #This file is part pyme module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 
 from setuptools import setup
@@ -39,7 +39,7 @@ setup(name='trytonspain_pyme',
         'trytond.modules.pyme.tests',
     ],
     package_data={
-        'trytond.modules.pyme': info.get('xml', []) \
+        'trytond.modules.pyme': info.get('xml', [])
             + ['tryton.cfg'],
     },
     classifiers=[

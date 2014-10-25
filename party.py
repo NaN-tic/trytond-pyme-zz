@@ -9,4 +9,3 @@ __metaclass__ = PoolMeta
 
 class Party:
     __name__ = 'party.party'
-
