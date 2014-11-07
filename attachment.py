@@ -1,7 +1,7 @@
 # This file is part of the pyme module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-from ...config import CONFIG
+from ...config import config
 from trytond.pool import PoolMeta
 from trytond.transaction import Transaction
 import os
@@ -16,7 +16,7 @@ class Attachment:
     def delete(cls, attachments):
         cursor = Transaction().cursor
         db_name = cursor.dbname
-        base_path = os.path.join(CONFIG.get('data_path'), db_name)
+        base_path = os.path.join(config.get('data_path'), db_name)
         archives = []
         for attachment in attachments:
             archive = attachment.digest
