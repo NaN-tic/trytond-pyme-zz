@@ -16,7 +16,7 @@ class Attachment:
     def delete(cls, attachments):
         cursor = Transaction().cursor
         db_name = cursor.dbname
-        base_path = os.path.join(config.get('data_path'), db_name)
+        base_path = os.path.join(config.get('database', 'path'), db_name)
         archives = []
         for attachment in attachments:
             archive = attachment.digest
