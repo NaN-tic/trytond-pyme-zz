@@ -3,25 +3,26 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data noupdate="1" skiptest="1">
-        <!-- TODO: Delete this record -->
-        <record model="smtp.server" id="smtp_demo_server">
-            <field name="name">Demo Server</field>
-            <field name="smtp_server">smtp.demo_server.com</field>
-            <field name="smtp_port">587</field>
-            <field name="smtp_ssl" eval="False"/>
-            <field name="smtp_tls" eval="True"/>
-            <field name="smtp_user">user@demo_server.com</field>
-            <field name="smtp_password">Secret_Password</field>
-            <field name="smtp_email">user@demo_server.com</field>
-            <field name="state">done</field>
+        <!-- Mailbox -->
+        <record model="electronic.mail.mailbox" id="electronic_mail_mailbox_send">
+            <field name="name">Enviado</field>
+        </record>
+        <record model="electronic.mail.mailbox" id="electronic_mail_mailbox_draft">
+            <field name="name">Borrador</field>
+        </record>
+        <record model="electronic.mail.mailbox" id="electronic_mail_mailbox_error">
+            <field name="name">Error</field>
+        </record>
+        <record model="electronic.mail.mailbox" id="electronic_mail_mailbox_outbox">
+            <field name="name">Salida</field>
         </record>
 
+        <!-- Electroni Mail Template -->
         <record model="electronic.mail.template" id="party_email_template">
-            <field name="name">Party eMail</field>
+            <field name="name">Tercero</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${','.join([x.email for x in record.addresses if x.email]) or record.get_mechanism('email') or ''}</field>
             <field name="subject">${record.name}</field>
-            <field name="smtp_server" ref="smtp_demo_server"/>
             <field name="model" search="[('model', '=', 'party.party')]"/>
             <field name="language">${record.lang and record.lang.code or 'es_ES'}</field>
             <field name="plain">${record.name}
@@ -39,11 +40,10 @@ Atentamente,</field>
         </record>
 
         <record model="electronic.mail.template" id="contact_email_template">
-            <field name="name">Contact eMail</field>
+            <field name="name">Contacto</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${record.email or record.party.get_mechanism('email') or ''}</field>
             <field name="subject">Subject ${record.name}</field>
-            <field name="smtp_server" ref="smtp_demo_server"/>
             <field name="model" search="[('model', '=', 'party.address')]"/>
             <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
             <field name="plain">${record.name}
@@ -60,12 +60,58 @@ Atentamente,</field>
             <field name="signature" eval="True"/>
         </record>
 
-        <record model="electronic.mail.template" id="sale_email_template">
-            <field name="name">Sale eMail</field>
+        <record model="electronic.mail.template" id="invoice_email_template">
+            <field name="name">Factura</field>
             <field name="from_">user@demo_server.com</field>
-            <field name="to">${record.party.email or record.party.get_mechanism('email') or ''}</field>
-            <field name="subject">${record.shipment_address.name} / ${record.reference or record.party.name} / ${record.create_date}</field>
-            <field name="smtp_server" ref="smtp_demo_server"/>
+            <field name="to">${record.invoice_address.email or record.party.get_mechanism('email') or ''}</field>
+            <field name="subject">${record.state in ['draft','proforma'] and 'Presupuesto' or 'Factura'} ${record.number or record.party.name}</field>
+            <field name="model" search="[('model', '=', 'account.invoice')]"/>
+            <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
+            <field name="plain">Estimado Sr./Sra. ${record.invoice_address.name or ''},
+
+#if record.state == 'draft'
+Adjuntamos el presupuesto que ha solicitado.
+#end
+#if record.state == 'proforma'
+Adjuntamos la factura ProForma ${record.description or ''}.
+#end
+#if record.state not in ['draft', 'proforma']
+Adjuntamos la factura con fecha ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} y número ${record.number}.
+#end
+
+El documento está en formato PDF. Para poder leerlo correctamente es necesario haber instalado un programa lector de PDFs (Adobe Acrobat Reader o similar) en su ordenador.
+
+Si desea alguna aclaración adicional puede contactar mediante la dirección de correo ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.
+
+Atentamente,</field>
+            <field name="html">&lt;p&gt;Estimado Sr./Sra. ${record.invoice_address.name or ''},&lt;/p&gt;
+
+#if record.state == 'draft'
+&lt;p&gt;Adjuntamos el presupuesto que ha solicitado.&lt;/p&gt;
+#end
+#if record.state == 'proforma'
+&lt;p&gt;Adjuntamos la factura ProForma ${record.description or ''}.&lt;/p&gt;
+#end
+#if record.state not in ['draft', 'proforma']
+&lt;p&gt;Adjuntamos la factura con fecha ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} y número ${record.number}.&lt;/p&gt;
+#end
+
+&lt;p&gt;El documento está en formato PDF. Para poder leerlo correctamente es necesario haber instalado un programa lector de PDFs (Adobe Acrobat Reader o similar) en su ordenador.&lt;/p&gt;
+
+&lt;p&gt;Si desea alguna aclaración adicional puede contactar mediante la dirección de correo ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.&lt;/p&gt;
+
+&lt;p&gt;Atentamente,&lt;/p&gt;</field>
+            <field name="engine">genshi</field>
+            <field name="signature" eval="True"/>
+        </record>
+    </data>
+
+    <data depends="sale" noupdate="1" skiptest="1">
+        <record model="electronic.mail.template" id="sale_email_template">
+            <field name="name">Venta</field>
+            <field name="from_">user@demo_server.com</field>
+            <field name="to">${record.invoice_address.email or record.party.get_mechanism('email') or ''}</field>
+            <field name="subject">${record.state in ['draft','quotation'] and 'Presupuesto' or 'Pedido'} ${record.reference or record.party.name}</field>
             <field name="model" search="[('model', '=', 'sale.sale')]"/>
             <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
             <field name="plain">Estimado Sr./Sra.
@@ -91,10 +137,7 @@ Adjuntamos al presente correo electrónico el pedido de venta con fecha ${str(re
 
 
 Atentamente,</field>
-            <field name="html">&lt;html&gt;
-&lt;head&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
-    &lt;title&gt;
+            <field name="html">
 #if record.state == 'draft'
 Presupuesto ${record.description or ''}
 #end
@@ -170,29 +213,7 @@ Pedido de venta '${record.description or ''}
                 &lt;/table&gt;
             &lt;/td&gt;
         &lt;/tr&gt;
-    &lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;</field>
-            <field name="engine">genshi</field>
-            <field name="signature" eval="True"/>
-        </record>
-
-        <record model="electronic.mail.template" id="invoice_email_template">
-            <field name="name">Invoice eMail</field>
-            <field name="from_">user@demo_server.com</field>
-            <field name="to">${record.party.get_mechanism('email') or ''}</field>
-            <field name="subject">Factura ${record.number or record.party.name} / ${record.invoice_address.name} </field>
-            <field name="smtp_server" ref="smtp_demo_server"/>
-            <field name="model" search="[('model', '=', 'account.invoice')]"/>
-            <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
-            <field name="plain">Para cualquier aclaración, contacte con ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}
-
-Atentamente,
-${record.party.name}</field>
-            <field name="html">&lt;p&gt;Para cualquier aclaración, contacte con ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}&lt;/p&gt;
-
-&lt;p&gt;Atentamente&lt;/p&gt;
-&lt;p&gt;${record.party.name}&lt;/p&gt;</field>
+    &lt;/table&gt;</field>
             <field name="engine">genshi</field>
             <field name="signature" eval="True"/>
         </record>
