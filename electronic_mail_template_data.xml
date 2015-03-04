@@ -18,6 +18,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         </record>
 
         <!-- Electroni Mail Template -->
+        <!-- Party -->
         <record model="electronic.mail.template" id="party_email_template">
             <field name="name">Tercero</field>
             <field name="from_">user@demo_server.com</field>
@@ -39,6 +40,57 @@ Atentamente,</field>
             <field name="signature" eval="True"/>
         </record>
 
+        <record model="electronic.mail.template" id="party_pending_payments_email_template">
+            <field name="name">Pagos pendientes</field>
+            <field name="from_">user@demo_server.com</field>
+            <field name="to">${','.join([x.email for x in record.addresses if x.email]) or record.get_mechanism('email') or ''}</field>
+            <field name="subject">Pagos pendientes de ${record.name}</field>
+            <field name="model" search="[('model', '=', 'party.party')]"/>
+            <field name="language">${record.lang and record.lang.code or 'es_ES'}</field>
+            <field name="plain">Buenos días ${record.name},
+
+Esta es la relación de pagos pendientes de ${record.name}:
+
+Fecha       Importe  Documento Descripción
+#for line in record.receivable_lines
+${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))} ${line.debit-line.credit}€  ${line.origin and line.origin.rec_name or ''} ${line.description}
+#end
+#for line in record.payable_lines
+${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))} ${line.debit-line.credit}€  ${line.origin and line.origin.rec_name or ''} ${line.description}
+#end
+
+La deuda total es de ${record.receivable-record.payable}€
+La deuda total ya vencida es de ${record.receivable_today-record.payable_today}€
+
+Les agradeceríamos que comprobaran esta información con su departamento de contabilidad y que realizaran los pagos pendientes lo más pronto posible. 
+
+Atentamente,</field>
+            <field name="html">&lt;p&gt;Buenos días ${record.name},&lt;/p&gt;
+
+&lt;p&gt;Esta es la relación de pagos pendientes de ${record.name}:&lt;/p&gt;
+
+&lt;table cellpadding="5"&gt;
+&lt;tr&gt;&lt;td&gt;Fecha&lt;/td&gt;&lt;td&gt;Importe&lt;/td&gt;&lt;td&gt;Documento&lt;/td&gt;&lt;td&gt;Descripción&lt;/td&gt;&lt;/tr&gt;
+#for line in record.receivable_lines
+&lt;tr&gt;&lt;td&gt;${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))}&lt;/td&gt;&lt;td align="right"&gt;${line.debit-line.credit}€&lt;/td&gt;&lt;td&gt;${line.origin and line.origin.rec_name or ''}&lt;/td&gt;&lt;td&gt;${line.description}&lt;/td&gt;&lt;/tr&gt;
+#end
+#for line in record.payable_lines
+&lt;tr&gt;&lt;td&gt;${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))}&lt;/td&gt;&lt;td align="right"&gt;${line.debit-line.credit}€&lt;/td&gt;&lt;td&gt;${line.origin and line.origin.rec_name or ''}&lt;/td&gt;&lt;td&gt;${line.description}&lt;/td&gt;&lt;/tr&gt;
+#end
+&lt;/table&gt;
+
+&lt;p&gt;La deuda total es de ${record.receivable-record.payable}€&lt;/p&gt;
+
+&lt;p&gt;La deuda total ya vencida es de ${record.receivable_today-record.payable_today}€&lt;/p&gt;
+
+&lt;p&gt;Les agradeceríamos que comprobaran esta información con su departamento de contabilidad y que realizaran los pagos pendientes lo más pronto posible. &lt;/p&gt;
+
+&lt;p&gt;Atentamente,&lt;/p&gt;</field>
+            <field name="engine">genshi</field>
+            <field name="signature" eval="True"/>
+        </record>
+
+        <!-- Contact / address -->
         <record model="electronic.mail.template" id="contact_email_template">
             <field name="name">Contacto</field>
             <field name="from_">user@demo_server.com</field>
@@ -60,6 +112,7 @@ Atentamente,</field>
             <field name="signature" eval="True"/>
         </record>
 
+        <!-- Invoice -->
         <record model="electronic.mail.template" id="invoice_email_template">
             <field name="name">Factura</field>
             <field name="from_">user@demo_server.com</field>
@@ -105,7 +158,12 @@ Atentamente,</field>
             <field name="signature" eval="True"/>
         </record>
     </data>
+    <record model="electronic.mail.template.ir.action.report" id="invoice_email_template_report">
+        <field name="template" ref="invoice_email_template"/>
+        <field name="report" ref="account_invoice.report_invoice"/>
+    </record>
 
+    <!-- Sale -->
     <data depends="sale" noupdate="1" skiptest="1">
         <record model="electronic.mail.template" id="sale_email_template">
             <field name="name">Venta</field>
@@ -216,6 +274,10 @@ Pedido de venta '${record.description or ''}
     &lt;/table&gt;</field>
             <field name="engine">genshi</field>
             <field name="signature" eval="True"/>
+        </record>
+        <record model="electronic.mail.template.ir.action.report" id="sale_email_template_report">
+            <field name="template" ref="sale_email_template"/>
+            <field name="report" ref="sale.report_sale"/>
         </record>
     </data>
 </tryton>
