@@ -3,6 +3,7 @@
 # the full copyright notices and license terms.
 from trytond.pool import Pool
 from .account import *
+from .tax import *
 from .bank import *
 from .product import *
 from .attachment import *
@@ -11,6 +12,7 @@ from .attachment import *
 def register():
     Pool.register(
         AccountConfiguration,
+        TaxLine,
         BankAccount,
         ProductTemplate,
         Attachment,
