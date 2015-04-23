@@ -23,5 +23,10 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="menu" ref="bank.menu_bank_account_form"/>
             <field name="group" ref="group_bank"/>
         </record>
+
+        <record model="ir.ui.menu" id="bank.menu_banking">
+            <field name="parent" ref="account.menu_account"/>
+            <field name="sequence">20</field>
+        </record>
     </data>
 </tryton>
