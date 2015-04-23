@@ -8,4 +8,10 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="group" ref="carrier.group_carrier_admin"/>
         </record>
     </data>
+
+    <data depends="carrier,stock">
+        <record model="ir.ui.menu" id="carrier.menu_carrier">
+            <field name="parent" ref="stock.menu_configuration"/>
+        </record>
+    </data>
 </tryton>
