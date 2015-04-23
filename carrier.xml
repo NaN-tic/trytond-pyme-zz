@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- This file is part pyme module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data depends="carrier">
+        <record model="ir.ui.menu-res.group" id="menu_carrier_group_carrier_admin">
+            <field name="menu" ref="carrier.menu_carrier"/>
+            <field name="group" ref="carrier.group_carrier_admin"/>
+        </record>
+    </data>
+</tryton>

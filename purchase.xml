@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- This file is part pyme module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data depends="purchase">
+        <record model="ir.ui.menu-res.group" id="menu_product_supplier_group_purchase_admin">
+            <field name="menu" ref="purchase.menu_product_supplier"/>
+            <field name="group" ref="purchase.group_purchase_admin"/>
+        </record>
+    </data>
+</tryton>

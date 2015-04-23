@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- This file is part pyme module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="res.group" id="group_bank">
+            <field name="name">Bank</field>
+        </record>
+        <record model="res.user-res.group" id="user_admin_group_bank">
+            <field name="user" ref="res.user_admin"/>
+            <field name="group" ref="group_bank"/>
+        </record>
+
+        <record model="ir.ui.menu-res.group" id="menu_banking_group_bank">
+            <field name="menu" ref="bank.menu_banking"/>
+            <field name="group" ref="group_bank"/>
+        </record>
+        <record model="ir.ui.menu-res.group" id="menu_bank_form_group_bank_admin">
+            <field name="menu" ref="bank.menu_bank_form"/>
+            <field name="group" ref="bank.group_bank_admin"/>
+        </record>
+        <record model="ir.ui.menu-res.group" id="menu_bank_account_form_group_bank">
+            <field name="menu" ref="bank.menu_bank_account_form"/>
+            <field name="group" ref="group_bank"/>
+        </record>
+    </data>
+</tryton>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- This file is part pyme module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.menu-res.group" id="menu_category_list_group_party_admin">
+            <field name="menu" ref="party.menu_category_list"/>
+            <field name="group" ref="party.group_party_admin"/>
+        </record>
+    </data>
+</tryton>
