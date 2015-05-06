@@ -17,3 +17,7 @@ msgstr "Mitjà de contacte"
 msgctxt "model:ir.ui.menu,name:menu_contact_mechanism_form"
 msgid "Contact Mechanism"
 msgstr "Mitjà de contacte"
+
+msgctxt "model:res.group,name:group_bank"
+msgid "Bank"
+msgstr "Banc"
