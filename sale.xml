@@ -2,7 +2,7 @@
 <!-- The COPYRIGHT file at the top level of this repository contains the full
 copyright notices and license terms. -->
 <tryton>
-    <data>
+    <data depends="sale">
 
         <!-- sale.sale -->
         <record model="ir.ui.view" id="sale_view_tree">
