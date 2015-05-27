@@ -6,8 +6,9 @@ copyright notices and license terms. -->
         <tree string="Sales" 
             colors="If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'quotation'), 'darkgreen',
+                If(Equal(Eval('state'), 'confirmed'), 'brown',
                 If(Equal(Eval('shipment_state'), 'exception'), 'red',
                 If(Equal(Eval('invoice_state'), 'exception'), 'red',
-                If(Equal(Eval('state'), 'cancel'), 'grey', 'black')))))"/>
+                If(Equal(Eval('state'), 'cancel'), 'grey', 'black'))))))"/>
     </xpath>
 </data>
