@@ -3,22 +3,11 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
+        <!-- account.configuration -->
         <record model="ir.ui.view" id="configuration_view_form">
             <field name="model">account.configuration</field>
-            <field name="type">form</field>
             <field name="inherit" ref="account.configuration_view_form"/>
-            <field name="arch" type="xml">
-                <![CDATA[
-                <data>
-                <xpath expr="/form/field[@name='default_account_payable']" position="after">
-                    <label name="default_customer_tax"/>
-                    <field name="default_customer_tax"/>
-                    <label name="default_supplier_tax"/>
-                    <field name="default_supplier_tax"/>
-                </xpath>
-                </data>
-                ]]>
-            </field>
+            <field name="name">configuration_form</field>
         </record>
 
         <!-- account.move -->
