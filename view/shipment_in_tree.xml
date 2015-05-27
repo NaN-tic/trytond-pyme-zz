@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+copyright notices and license terms. -->
+<data>
+    <xpath expr="/tree" position="replace_attributes">
+        <tree string="Sales" 
+            colors="If(Equal(Eval('state'), 'draft'), 'blue',
+                If(Equal(Eval('state'), 'received'), 'darkgreen',
+                If(Equal(Eval('state'), 'cancel'), 'grey', 'black')))"/>
+    </xpath>
+</data>
