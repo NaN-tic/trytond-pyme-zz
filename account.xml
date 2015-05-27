@@ -20,5 +20,13 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                 ]]>
             </field>
         </record>
+
+        <!-- account.move -->
+        <record model="ir.ui.view" id="move_view_tree">
+            <field name="model">account.move</field>
+            <field name="inherit"
+                ref="account.move_view_tree"/>
+            <field name="name">move_tree</field>
+        </record>
     </data>
 </tryton>
