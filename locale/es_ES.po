@@ -21,3 +21,11 @@ msgstr "Medios de contacto"
 msgctxt "model:res.group,name:group_bank"
 msgid "Bank"
 msgstr "Banco"
+
+msgctxt "view:account.move:"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt "view:account.move:"
+msgid "Post"
+msgstr "Contabilizar"

@@ -21,3 +21,11 @@ msgstr "Mitjà de contacte"
 msgctxt "model:res.group,name:group_bank"
 msgid "Bank"
 msgstr "Banc"
+
+msgctxt "view:account.move:"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "view:account.move:"
+msgid "Post"
+msgstr "Comptabilitza"
