@@ -13,7 +13,8 @@ class Invoice:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(Invoice, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue', 
                 If(Equal(Eval('state'), 'validated'), 'green', 
                 If(Equal(Eval('state'), 'posted'), 'brown', 

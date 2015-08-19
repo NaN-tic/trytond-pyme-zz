@@ -13,6 +13,7 @@ class Move:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(Move, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue', 'black'),
                 )]

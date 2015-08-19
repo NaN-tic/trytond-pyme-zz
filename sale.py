@@ -13,7 +13,8 @@ class Sale:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(Sale, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'quotation'), 'darkgreen',
                 If(Equal(Eval('state'), 'confirmed'), 'brown',

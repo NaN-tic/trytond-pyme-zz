@@ -14,7 +14,8 @@ class ShipmentIn:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(ShipmentIn, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'received'), 'darkgreen',
                 If(Equal(Eval('state'), 'cancel'), 'grey', 'black'))),
@@ -26,7 +27,8 @@ class ShipmentInReturn:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(ShipmentInReturn, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'waiting'), 'brown',
                 If(Equal(Eval('state'), 'assigned'), 'darkgreen',
@@ -39,7 +41,8 @@ class ShipmentInternal:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(ShipmentInternal, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'waiting'), 'brown',
                 If(Equal(Eval('state'), 'assigned'), 'darkgreen',
@@ -52,7 +55,8 @@ class ShipmentOut:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(ShipmentOut, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'waiting'), 'brown',
                 If(Equal(Eval('state'), 'assigned'), 'darkgreen',
@@ -65,7 +69,8 @@ class ShipmentOutReturn:
 
     @classmethod
     def view_attributes(cls):
-        return [('/tree', 'colors',
+        return super(ShipmentOutReturn, cls).view_attributes() + [
+            ('/tree', 'colors',
                 If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'received'), 'darkgreen',
                 If(Equal(Eval('state'), 'cancel'), 'grey', 'black'))),
