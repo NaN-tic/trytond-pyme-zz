@@ -12,9 +12,8 @@ class TaxLine():
     __name__ = 'account.tax.line'
 
     def on_change_tax(self):
-        values = super(TaxLine, self).on_change_tax()
-        del values['code']
-        return values
+        super(TaxLine, self).on_change_tax()
+        self.code = None
 
     @fields.depends('move_line')
     def on_change_with_company(self, name=None):
