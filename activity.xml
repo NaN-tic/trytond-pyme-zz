@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- This file is part pyme module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data noupdate="1" skiptest="1">
+        <record model="activity.reference" id="activity_reference_party">
+            <field name="model" search="[('model', '=', 'party.party')]"/>
+        </record>
+        <record model="activity.reference" id="activity_reference_address">
+            <field name="model" search="[('model', '=', 'party.address')]"/>
+        </record>
+        <record model="activity.reference" id="activity_reference_invoice">
+            <field name="model" search="[('model', '=', 'account.invoice')]"/>
+        </record>
+    </data>
+    <data depends="sale" noupdate="1" skiptest="1">
+        <record model="activity.reference" id="activity_reference_sale">
+            <field name="model" search="[('model', '=', 'sale.sale')]"/>
+        </record>
+    </data>
+</tryton>
