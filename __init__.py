@@ -5,6 +5,7 @@ from trytond.pool import Pool
 from .account import *
 from .attachment import *
 from .bank import *
+from .company import *
 from .invoice import *
 from .move import *
 from .product import *
@@ -18,6 +19,7 @@ def register():
         AccountConfiguration,
         Attachment,
         BankAccount,
+        Employee,
         Invoice,
         Move,
         TaxLine,
