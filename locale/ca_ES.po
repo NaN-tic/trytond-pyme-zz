@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -10,11 +10,15 @@ msgctxt "field:account.configuration,default_supplier_tax:"
 msgid "Default Supplier Tax"
 msgstr "Impost compra per defecte"
 
-msgctxt "model:ir.action,name:act_contact_mechanism_form"
+msgctxt "field:company.employee,active:"
+msgid "Active"
+msgstr "Actiu"
+
+msgctxt "model:ir.action,name:"
 msgid "Contact Mechanism"
 msgstr "Mitjà de contacte"
 
-msgctxt "model:ir.ui.menu,name:menu_contact_mechanism_form"
+msgctxt "model:ir.ui.menu,name:"
 msgid "Contact Mechanism"
 msgstr "Mitjà de contacte"
 
