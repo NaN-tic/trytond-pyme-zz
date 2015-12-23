@@ -30,3 +30,9 @@ Contabilidad
 ============
 
 - Allow add tax lines in move lines
+
+Tercero
+=======
+
+- Añade acceso grupo Party admin en categorias de terceros
+- Añade propiedad por defecto del idioma del tercero
