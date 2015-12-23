@@ -27,7 +27,7 @@ class Invoice:
 class InvoiceLine:
     __name__ = 'account.invoice.line'
 
-    @fields.depends('product', '')
+    @fields.depends('product', 'unit_price')
     def on_change_product(self):
         pool = Pool()
         Company = pool.get('company.company')
@@ -35,6 +35,9 @@ class InvoiceLine:
         Date = pool.get('ir.date')
 
         super(InvoiceLine, self).on_change_product()
+
+        if self.unit_price:
+            return
 
         company = None
         if Transaction().context.get('company'):
