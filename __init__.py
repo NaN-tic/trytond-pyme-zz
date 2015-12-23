@@ -21,6 +21,7 @@ def register():
         BankAccount,
         Employee,
         Invoice,
+        InvoiceLine,
         Move,
         TaxLine,
         ProductTemplate,
