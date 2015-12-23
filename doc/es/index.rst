@@ -30,6 +30,7 @@ Contabilidad
 ============
 
 - Allow add tax lines in move lines
+- Línea de factura. Añadir precio venta/coste según tipo de factura al seleccionar un producto
 
 Tercero
 =======
