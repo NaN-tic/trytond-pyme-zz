@@ -22,6 +22,26 @@ msgctxt "model:ir.ui.menu,name:"
 msgid "Contact Mechanism"
 msgstr "Medios de contacto"
 
+msgctxt "model:ir.ui.menu,name:menu_act_searching_invoice"
+msgid "Searching"
+msgstr "Búsqueda"
+
+msgctxt "model:ir.ui.menu,name:menu_act_searching_party"
+msgid "Searching"
+msgstr "Búsqueda"
+
+msgctxt "model:ir.ui.menu,name:menu_act_searching_purchase"
+msgid "Searching"
+msgstr "Búsqueda"
+
+msgctxt "model:ir.ui.menu,name:menu_act_searching_sale"
+msgid "Searching"
+msgstr "Búsqueda"
+
+msgctxt "model:ir.ui.menu,name:menu_act_searching_shipment"
+msgid "Searching"
+msgstr "Búsqueda"
+
 msgctxt "model:res.group,name:group_bank"
 msgid "Bank"
 msgstr "Banco"
