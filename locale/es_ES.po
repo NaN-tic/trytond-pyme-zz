@@ -14,14 +14,6 @@ msgctxt "field:company.employee,active:"
 msgid "Active"
 msgstr "Activo"
 
-msgctxt "model:ir.action,name:"
-msgid "Contact Mechanism"
-msgstr "Medios de contacto"
-
-msgctxt "model:ir.ui.menu,name:"
-msgid "Contact Mechanism"
-msgstr "Medios de contacto"
-
 msgctxt "model:ir.ui.menu,name:menu_act_searching_invoice"
 msgid "Searching"
 msgstr "Búsqueda"
