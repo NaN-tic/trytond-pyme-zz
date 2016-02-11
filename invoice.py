@@ -66,13 +66,14 @@ class InvoiceLine:
             else:
                 self.unit_price = self.product.cost_price
         else:
-            if company and currency:
-                with Transaction().set_context(date=currency_date):
-                    self.unit_price = Currency.compute(
-                        company.currency, self.product.list_price,
-                        currency, round=False)
-            else:
-                self.unit_price = self.product.list_price
+            if self.product:
+                if company and currency:
+                    with Transaction().set_context(date=currency_date):
+                        self.unit_price = Currency.compute(
+                            company.currency, self.product.list_price,
+                            currency, round=False)
+                else:
+                    self.unit_price = self.product.list_price
 
         self.type = 'line'
         self.amount = self.on_change_with_amount()
