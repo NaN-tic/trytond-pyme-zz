@@ -20,7 +20,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <!-- Electroni Mail Template -->
         <!-- Party -->
         <record model="electronic.mail.template" id="party_email_template">
-            <field name="name">Correo tercero</field>
+            <field name="name">Send party email</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${','.join([x.email for x in record.addresses if x.email]) or record.get_mechanism('email') or ''}</field>
             <field name="subject">${record.name}</field>
@@ -28,71 +28,71 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="language">${record.lang and record.lang.code or 'es_ES'}</field>
             <field name="plain">${record.name}
 
-Estimado Sr./Sra.
+Dear Mr./Ms.,
 
-Atentamente,</field>
+Sincerely,</field>
             <field name="html">&lt;h2&gt;${record.name}&lt;/h2&gt;
 
-&lt;p&gt;Estimado Sr./Sra.&lt;/p&gt;
+&lt;p&gt;Dear Mr./Ms.,&lt;/p&gt;
 
-&lt;p&gt;Atentamente,&lt;/p&gt;</field>
+&lt;p&gt;Sincerely,&lt;/p&gt;</field>
             <field name="engine">genshi</field>
             <field name="signature" eval="True"/>
         </record>
 
         <record model="electronic.mail.template" id="party_pending_payments_email_template">
-            <field name="name">Correo pagos pendientes</field>
+            <field name="name">Send overdue payments email</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${','.join([x.email for x in record.addresses if x.email]) or record.get_mechanism('email') or ''}</field>
-            <field name="subject">Pagos pendientes de ${record.name}</field>
+            <field name="subject">Overdue payments of ${record.name}</field>
             <field name="model" search="[('model', '=', 'party.party')]"/>
             <field name="language">${record.lang and record.lang.code or 'es_ES'}</field>
-            <field name="plain">Buenos días ${record.name},
+            <field name="plain">Dear Mr./Ms. ${record.name},
 
-Esta es la relación de pagos pendientes de ${record.name}:
+This is the list of overdue payments of ${record.name}:
 
-Fecha       Importe  Documento Descripción
+Date        Amount   Document  Description
 #for line in record.receivable_lines
-${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))} ${line.debit-line.credit}€  ${line.origin and line.origin.rec_name or ''} ${line.description}
+${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))} ${line.debit-line.credit}€  ${line.origin and getattr(line.origin, 'rec_name', False) and line.origin.rec_name or ''} ${line.description}
 #end
 #for line in record.payable_lines
-${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))} ${line.debit-line.credit}€  ${line.origin and line.origin.rec_name or ''} ${line.description}
+${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))} ${line.debit-line.credit}€  ${line.origin and getattr(line.origin, 'rec_name', False) and line.origin.rec_name or ''} ${line.description}
 #end
 
-La deuda total es de ${record.receivable-record.payable}€
-La deuda total ya vencida es de ${record.receivable_today-record.payable_today}€
+Total debt is ${record.receivable-record.payable}€
+Total overdue debt is ${record.receivable_today-record.payable_today}€
 
-Les agradeceríamos que comprobaran esta información con su departamento de contabilidad y que realizaran los pagos pendientes lo más pronto posible. 
+We would appreciate checked this information with your accounting department and to make overdue payments as soon as possible.
 
-Atentamente,</field>
-            <field name="html">&lt;p&gt;Buenos días ${record.name},&lt;/p&gt;
+Sincerely,</field>
+            <field name="html">&lt;p&gt;Dear Mr./Ms. ${record.name},&lt;/p&gt;
 
-&lt;p&gt;Esta es la relación de pagos pendientes de ${record.name}:&lt;/p&gt;
+&lt;p&gt;This is the list of overdue payments of ${record.name}:&lt;/p&gt;
 
 &lt;table cellpadding="5"&gt;
-&lt;tr&gt;&lt;td&gt;Fecha&lt;/td&gt;&lt;td&gt;Importe&lt;/td&gt;&lt;td&gt;Documento&lt;/td&gt;&lt;td&gt;Descripción&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Date&lt;/td&gt;&lt;td&gt;Amount&lt;/td&gt;&lt;td&gt;Document&lt;/td&gt;&lt;td&gt;Description&lt;/td&gt;&lt;/tr&gt;
 #for line in record.receivable_lines
-&lt;tr&gt;&lt;td&gt;${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))}&lt;/td&gt;&lt;td align="right"&gt;${line.debit-line.credit}€&lt;/td&gt;&lt;td&gt;${line.origin and line.origin.rec_name or ''}&lt;/td&gt;&lt;td&gt;${line.description}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))}&lt;/td&gt;&lt;td align="right"&gt;${line.debit-line.credit}€&lt;/td&gt;&lt;td&gt;${line.origin and getattr(line.origin, 'rec_name', False) and line.origin.rec_name or ''}&lt;/td&gt;&lt;td&gt;${line.description}&lt;/td&gt;&lt;/tr&gt;
 #end
 #for line in record.payable_lines
-&lt;tr&gt;&lt;td&gt;${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))}&lt;/td&gt;&lt;td align="right"&gt;${line.debit-line.credit}€&lt;/td&gt;&lt;td&gt;${line.origin and line.origin.rec_name or ''}&lt;/td&gt;&lt;td&gt;${line.description}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;${str(line.maturity_date)[8:]}-${str(line.maturity_date)[5:7]}-${str(line.maturity_date)[:4]} ${' '*(8-len(str(line.debit-line.credit)))}&lt;/td&gt;&lt;td align="right"&gt;${line.debit-line.credit}€&lt;/td&gt;&lt;td&gt;${line.origin and getattr(line.origin, 'rec_name', False) and line.origin.rec_name or ''}&lt;/td&gt;&lt;td&gt;${line.description}&lt;/td&gt;&lt;/tr&gt;
 #end
 &lt;/table&gt;
 
-&lt;p&gt;La deuda total es de ${record.receivable-record.payable}€&lt;/p&gt;
+&lt;p&gt;Total debt is ${record.receivable-record.payable}€&lt;/p&gt;
 
-&lt;p&gt;La deuda total ya vencida es de ${record.receivable_today-record.payable_today}€&lt;/p&gt;
+&lt;p&gt;Total overdue debt is ${record.receivable_today-record.payable_today}€&lt;/p&gt;
 
-&lt;p&gt;Les agradeceríamos que comprobaran esta información con su departamento de contabilidad y que realizaran los pagos pendientes lo más pronto posible. &lt;/p&gt;
+&lt;p&gt;We would appreciate checked this information with your accounting department and to make overdue payments as soon as possible.&lt;/p&gt;
 
-&lt;p&gt;Atentamente,&lt;/p&gt;</field>
+&lt;p&gt;Sincerely,&lt;/p&gt;</field>
             <field name="engine">genshi</field>
             <field name="signature" eval="True"/>
         </record>
 
         <!-- Contact / address -->
         <record model="electronic.mail.template" id="contact_email_template">
-            <field name="name">Correo contacto</field>
+            <field name="name">Send contact email</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${record.email or record.party.get_mechanism('email') or ''}</field>
             <field name="subject">${record.name}</field>
@@ -100,60 +100,60 @@ Atentamente,</field>
             <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
             <field name="plain">${record.name}
 
-Estimado Sr./Sra.
+Dear Mr./Ms.,
 
-Atentamente,</field>
+Sincerely,</field>
             <field name="html">&lt;h2&gt;${record.name}&lt;/h2&gt;
 
-&lt;p&gt;Estimado Sr./Sra.&lt;/p&gt;
+&lt;p&gt;Dear Mr./Ms.,&lt;/p&gt;
 
-&lt;p&gt;Atentamente,&lt;/p&gt;</field>
+&lt;p&gt;Sincerely,&lt;/p&gt;</field>
             <field name="engine">genshi</field>
             <field name="signature" eval="True"/>
         </record>
 
         <!-- Invoice -->
         <record model="electronic.mail.template" id="invoice_email_template">
-            <field name="name">Correo factura</field>
+            <field name="name">Send invoice email</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${record.invoice_address.email or record.party.get_mechanism('email') or ''}</field>
-            <field name="subject">${record.state in ['draft','proforma'] and 'Presupuesto' or 'Factura'} ${record.number or record.party.name}</field>
+            <field name="subject">${record.state in ['draft','proforma'] and 'Quotation' or 'Invoice'} ${record.number or record.party.name}</field>
             <field name="model" search="[('model', '=', 'account.invoice')]"/>
             <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
-            <field name="plain">Estimado Sr./Sra. ${record.invoice_address.name or ''},
+            <field name="plain">Dear Mr./Ms. ${record.invoice_address.name or ''},
 
 #if record.state == 'draft'
-Adjuntamos el presupuesto que ha solicitado.
+Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''}.
 #end
 #if record.state == 'proforma'
-Adjuntamos la factura ProForma ${record.description or ''}.
+Attached we send the ProForma invoice${record.description and ' concerning "'+record.description+'"' or ''}.
 #end
 #if record.state not in ['draft', 'proforma']
-Adjuntamos la factura con fecha ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} y número ${record.number}.
+Attached we send the invoice dated ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} and number ${record.number}${record.description and ', concerning "'+record.description+'"' or ''}.
 #end
 
-El documento está en formato PDF. Para poder leerlo correctamente es necesario haber instalado un programa lector de PDFs (Adobe Acrobat Reader o similar) en su ordenador.
+The document is in PDF format. To read it correctly you must have installed a PDF reader program (Adobe Acrobat Reader or similar) on your computer.
 
-Si desea alguna aclaración adicional puede contactar mediante la dirección de correo ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.
+If you want any further clarification you can contact by e-mail to ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.
 
-Atentamente,</field>
-            <field name="html">&lt;p&gt;Estimado Sr./Sra. ${record.invoice_address.name or ''},&lt;/p&gt;
+Sincerely,</field>
+            <field name="html">&lt;p&gt;Dear Mr./Ms. ${record.invoice_address.name or ''},&lt;/p&gt;
 
 #if record.state == 'draft'
-&lt;p&gt;Adjuntamos el presupuesto que ha solicitado.&lt;/p&gt;
+&lt;p&gt;Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''}.&lt;/p&gt;
 #end
 #if record.state == 'proforma'
-&lt;p&gt;Adjuntamos la factura ProForma ${record.description or ''}.&lt;/p&gt;
+&lt;p&gt;Attached we send the ProForma invoice${record.description and ' concerning "'+record.description+'"' or ''}.&lt;/p&gt;
 #end
 #if record.state not in ['draft', 'proforma']
-&lt;p&gt;Adjuntamos la factura con fecha ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} y número ${record.number}.&lt;/p&gt;
+&lt;p&gt;Attached we send the invoice dated ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} and number ${record.number}${record.description and ', concerning "'+record.description+'"' or ''}.&lt;/p&gt;
 #end
 
-&lt;p&gt;El documento está en formato PDF. Para poder leerlo correctamente es necesario haber instalado un programa lector de PDFs (Adobe Acrobat Reader o similar) en su ordenador.&lt;/p&gt;
+&lt;p&gt;The document is in PDF format. To read it correctly you must have installed a PDF reader program (Adobe Acrobat Reader or similar) on your computer.&lt;/p&gt;
 
-&lt;p&gt;Si desea alguna aclaración adicional puede contactar mediante la dirección de correo ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.&lt;/p&gt;
+&lt;p&gt;If you want any further clarification you can contact by e-mail to ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.&lt;/p&gt;
 
-&lt;p&gt;Atentamente,&lt;/p&gt;</field>
+&lt;p&gt;Sincerely,&lt;/p&gt;</field>
             <field name="engine">genshi</field>
             <field name="signature" eval="True"/>
         </record>
@@ -166,26 +166,26 @@ Atentamente,</field>
     <!-- Sale -->
     <data depends="sale" noupdate="1" skiptest="1">
         <record model="electronic.mail.template" id="sale_email_template">
-            <field name="name">Correo venta</field>
+            <field name="name">Send sale email</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${record.invoice_address.email or record.party.get_mechanism('email') or ''}</field>
-            <field name="subject">${record.state in ['draft','quotation'] and 'Presupuesto' or 'Pedido'} ${record.reference or record.party.name}</field>
+            <field name="subject">${record.state in ['draft','quotation'] and 'Quotation' or 'Order'} ${record.reference or record.party.name}</field>
             <field name="model" search="[('model', '=', 'sale.sale')]"/>
             <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
-            <field name="plain">Estimado Sr./Sra. ${record.invoice_address and record.invoice_address.name or ''},
+            <field name="plain">Dear Mr./Ms. ${record.invoice_address and record.invoice_address.name or ''},
 
 #if record.state == 'draft'
-Adjuntamos el presupuesto '${record.description or ''}' que ha solicitado.
+Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''}.
 #end
 #if record.state == 'quotation'
-Adjuntamos el presupuesto '${record.description or ''}' con referencia ${record.reference} que ha solicitado.
+Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''} with reference ${record.reference}.
 #end
 #if record.state not in ['draft', 'quotation']
-Adjuntamos el pedido de venta '${record.description or ''}' con fecha ${str(record.sale_date)[8:]}-${str(record.sale_date)[5:7]}-${str(record.sale_date)[:4]} y referencia ${record.reference}.
+Attached we send the order${record.description and ' concerning "'+record.description+'"' or ''} dated ${str(record.sale_date)[8:]}-${str(record.sale_date)[5:7]}-${str(record.sale_date)[:4]} with reference ${record.reference}.
 #end
 
 #if record.lines
-  Ctd Producto
+  Qty Product
   #for line in record.lines
   #if line.type == 'line'
   ${line.quantity or ''} ${line.description or ''} 
@@ -193,30 +193,29 @@ Adjuntamos el pedido de venta '${record.description or ''}' con fecha ${str(reco
   #end
 #end
 
-El documento está en formato PDF. Para poder leerlo correctamente es necesario haber instalado un programa lector de PDFs (Adobe Acrobat Reader o similar) en su ordenador.
+The document is in PDF format. To read it correctly you must have installed a PDF reader program (Adobe Acrobat Reader or similar) on your computer.
 
-Si desea alguna aclaración adicional puede contactar mediante la dirección de correo ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.
+If you want any further clarification you can contact by e-mail to ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.
 
-Atentamente,</field>
-            <field name="html">
-&lt;p&gt;Estimado Sr./Sra. ${record.invoice_address and record.invoice_address.name or ''},&lt;/p&gt;
+Sincerely,</field>
+            <field name="html">&lt;p&gt;Dear Mr./Ms. ${record.invoice_address and record.invoice_address.name or ''},&lt;/p&gt;
 
 #if record.state == 'draft'
-&lt;p&gt;Adjuntamos el presupuesto '${record.description or ''}' que ha solicitado.&lt;/p&gt;
+&lt;p&gt;Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''}.&lt;/p&gt;
 #end
 #if record.state == 'quotation'
-&lt;p&gt;Adjuntamos el presupuesto '${record.description or ''}' con referencia ${record.reference} que ha solicitado.&lt;/p&gt;
+&lt;p&gt;Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''} with reference ${record.reference}.&lt;/p&gt;
 #end
 #if record.state not in ['draft', 'quotation']
-&lt;p&gt;Adjuntamos el pedido de venta '${record.description or ''}' con fecha ${str(record.sale_date)[8:]}-${str(record.sale_date)[5:7]}-${str(record.sale_date)[:4]} y referencia ${record.reference}.&lt;/p&gt;
+&lt;p&gt;Attached we send the order${record.description and ' concerning "'+record.description+'"' or ''} dated ${str(record.sale_date)[8:]}-${str(record.sale_date)[5:7]}-${str(record.sale_date)[:4]} with reference ${record.reference}.&lt;/p&gt;
 #end
 
 &lt;table class="table table-condensed" cellpadding="3" width="100%"&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Cantidad&lt;/th&gt;
-      &lt;th&gt;Producto&lt;/th&gt;
-      &lt;th&gt;Precio&lt;/th&gt;
+      &lt;th&gt;Quantity&lt;/th&gt;
+      &lt;th&gt;Product&lt;/th&gt;
+      &lt;th&gt;Price&lt;/th&gt;
       &lt;th&gt;Total&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
@@ -233,8 +232,8 @@ Atentamente,</field>
       &lt;td colspan="4" style="text-align: right; color:#006699;"&gt;
         &lt;hr/&gt;
           &lt;ul style="list-style: none";&gt;
-            &lt;li&gt;&lt;strong&gt;Base:&lt;/strong&gt; ${record.untaxed_amount}&lt;/li&gt;
-            &lt;li&gt;&lt;strong&gt;Impuestos:&lt;/strong&gt; ${record.tax_amount}&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Amount:&lt;/strong&gt; ${record.untaxed_amount}&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Taxes:&lt;/strong&gt; ${record.tax_amount}&lt;/li&gt;
             &lt;li&gt;&lt;strong&gt;Total:&lt;/strong&gt; ${record.total_amount}&lt;/li&gt;
           &lt;/ul&gt;
       &lt;/td&gt;
@@ -242,17 +241,110 @@ Atentamente,</field>
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;El documento está en formato PDF. Para poder leerlo correctamente es necesario haber instalado un programa lector de PDFs (Adobe Acrobat Reader o similar) en su ordenador.&lt;/p&gt;
+&lt;p&gt;The document is in PDF format. To read it correctly you must have installed a PDF reader program (Adobe Acrobat Reader or similar) on your computer.&lt;/p&gt;
 
-&lt;p&gt;Si desea alguna aclaración adicional puede contactar mediante la dirección de correo ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.&lt;/p&gt;
+&lt;p&gt;If you want any further clarification you can contact by e-mail to ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.&lt;/p&gt;
 
-&lt;p&gt;Atentamente,&lt;/p&gt;</field>
+&lt;p&gt;Sincerely,&lt;/p&gt;</field>
             <field name="engine">genshi</field>
             <field name="signature" eval="True"/>
         </record>
         <record model="electronic.mail.template.ir.action.report" id="sale_email_template_report">
             <field name="template" ref="sale_email_template"/>
             <field name="report" ref="sale.report_sale"/>
+        </record>
+    </data>
+
+
+    <!-- Purchase -->
+    <data depends="purchase" noupdate="1" skiptest="1">
+        <record model="electronic.mail.template" id="purchase_email_template">
+            <field name="name">Send purchase email</field>
+            <field name="from_">user@demo_server.com</field>
+            <field name="to">${record.invoice_address.email or record.party.get_mechanism('email') or ''}</field>
+            <field name="subject">Purchase ${record.state in ['draft','quotation'] and 'Request' or 'Order'} ${record.reference or record.party.name}</field>
+            <field name="model" search="[('model', '=', 'purchase.purchase')]"/>
+            <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
+            <field name="plain">Dear Mr./Ms. ${record.invoice_address and record.invoice_address.name or ''},
+
+#if record.state == 'draft'
+Attached we send the purchase request${record.description and ' concerning "'+record.description+'"' or ''}.
+#end
+#if record.state == 'quotation'
+Attached we send the purchase request${record.description and ' concerning "'+record.description+'"' or ''} with reference ${record.reference}.
+#end
+#if record.state not in ['draft', 'quotation']
+Attached we send the purchase order${record.description and ' concerning "'+record.description+'"' or ''} dated ${str(record.purchase_date)[8:]}-${str(record.purchase_date)[5:7]}-${str(record.purchase_date)[:4]} with reference ${record.reference}.
+#end
+
+#if record.lines
+  Qty Product
+  #for line in record.lines
+  #if line.type == 'line'
+  ${line.quantity or ''} ${line.description or ''} 
+  #end
+  #end
+#end
+
+The document is in PDF format. To read it correctly you must have installed a PDF reader program (Adobe Acrobat Reader or similar) on your computer.
+
+If you want any further clarification you can contact by e-mail to ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.
+
+Sincerely,</field>
+            <field name="html">&lt;p&gt;Dear Mr./Ms. ${record.invoice_address and record.invoice_address.name or ''},&lt;/p&gt;
+
+#if record.state == 'draft'
+&lt;p&gt;Attached we send the purchase request${record.description and ' concerning "'+record.description+'"' or ''}.&lt;/p&gt;
+#end
+#if record.state == 'quotation'
+&lt;p&gt;Attached we send the purchase request${record.description and ' concerning "'+record.description+'"' or ''} with reference ${record.reference}.&lt;/p&gt;
+#end
+#if record.state not in ['draft', 'quotation']
+&lt;p&gt;Attached we send the purchase order${record.description and ' concerning "'+record.description+'"' or ''} dated ${str(record.purchase_date)[8:]}-${str(record.purchase_date)[5:7]}-${str(record.purchase_date)[:4]} with reference ${record.reference}.&lt;/p&gt;
+#end
+
+&lt;table class="table table-condensed" cellpadding="3" width="100%"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Quantity&lt;/th&gt;
+      &lt;th&gt;Product&lt;/th&gt;
+      &lt;th&gt;Price&lt;/th&gt;
+      &lt;th&gt;Total&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  #for line in record.lines
+    &lt;tr&gt;
+      &lt;td&gt;${line.quantity or ''}&lt;/td&gt;
+      &lt;td&gt;${line.description or ''}&lt;/td&gt;
+      &lt;td style="text-align: right; color:#006699;"&gt;${line.unit_price and round(line.unit_price, 2) or ''}&lt;/td&gt;
+      &lt;td style="text-align: right; color:#006699;"&gt;${line.amount or ''}&lt;/td&gt;
+    &lt;/tr&gt;
+  #end
+    &lt;tr&gt;
+      &lt;td colspan="4" style="text-align: right; color:#006699;"&gt;
+        &lt;hr/&gt;
+          &lt;ul style="list-style: none";&gt;
+            &lt;li&gt;&lt;strong&gt;Amount:&lt;/strong&gt; ${record.untaxed_amount}&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Taxes:&lt;/strong&gt; ${record.tax_amount}&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Total:&lt;/strong&gt; ${record.total_amount}&lt;/li&gt;
+          &lt;/ul&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The document is in PDF format. To read it correctly you must have installed a PDF reader program (Adobe Acrobat Reader or similar) on your computer.&lt;/p&gt;
+
+&lt;p&gt;If you want any further clarification you can contact by e-mail to ${record.company.party.get_mechanism('email') or 'user@demo_server.com'}.&lt;/p&gt;
+
+&lt;p&gt;Sincerely,&lt;/p&gt;</field>
+            <field name="engine">genshi</field>
+            <field name="signature" eval="True"/>
+        </record>
+        <record model="electronic.mail.template.ir.action.report" id="purchase_email_template_report">
+            <field name="template" ref="purchase_email_template"/>
+            <field name="report" ref="purchase.report_purchase"/>
         </record>
     </data>
 </tryton>
