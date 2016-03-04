@@ -13,9 +13,30 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="model" search="[('model', '=', 'account.invoice')]"/>
         </record>
     </data>
+
+    <!-- ir model access account invoice and activity group -->
+    <record model="ir.model.access" id="access_account_invoice_activity">
+        <field name="model" search="[('model', '=', 'account.invoice')]"/>
+        <field name="group" ref="activity.group_activity"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_delete" eval="False"/>
+    </record>
+
     <data depends="sale" noupdate="1" skiptest="1">
         <record model="activity.reference" id="activity_reference_sale">
             <field name="model" search="[('model', '=', 'sale.sale')]"/>
+        </record>
+
+        <!-- ir model access sale and activity group -->
+        <record model="ir.model.access" id="access_sale_activity">
+            <field name="model" search="[('model', '=', 'sale.sale')]"/>
+            <field name="group" ref="activity.group_activity"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
         </record>
     </data>
 </tryton>
