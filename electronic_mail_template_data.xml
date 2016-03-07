@@ -117,7 +117,7 @@ Sincerely,</field>
             <field name="name">Send invoice email</field>
             <field name="from_">user@demo_server.com</field>
             <field name="to">${record.invoice_address.email or record.party.get_mechanism('email') or ''}</field>
-            <field name="subject">${record.state in ['draft','proforma'] and 'Quotation' or 'Invoice'} ${record.number or record.party.name}</field>
+            <field name="subject">${record.state == 'draft' and 'Quotation' or 'Invoice'}${record.state == 'validated' and ' ProForma' or ''} ${record.number or record.party.name}</field>
             <field name="model" search="[('model', '=', 'account.invoice')]"/>
             <field name="language">${record.party.lang and record.party.lang.code or 'es_ES'}</field>
             <field name="plain">Dear Mr./Ms. ${record.invoice_address.name or ''},
@@ -125,10 +125,10 @@ Sincerely,</field>
 #if record.state == 'draft'
 Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''}.
 #end
-#if record.state == 'proforma'
+#if record.state == 'validated'
 Attached we send the ProForma invoice${record.description and ' concerning "'+record.description+'"' or ''}.
 #end
-#if record.state not in ['draft', 'proforma']
+#if record.state not in ['draft', 'validated']
 Attached we send the invoice dated ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} and number ${record.number}${record.description and ', concerning "'+record.description+'"' or ''}.
 #end
 
@@ -142,10 +142,10 @@ Sincerely,</field>
 #if record.state == 'draft'
 &lt;p&gt;Attached we send the requested quotation${record.description and ' concerning "'+record.description+'"' or ''}.&lt;/p&gt;
 #end
-#if record.state == 'proforma'
+#if record.state == 'validated'
 &lt;p&gt;Attached we send the ProForma invoice${record.description and ' concerning "'+record.description+'"' or ''}.&lt;/p&gt;
 #end
-#if record.state not in ['draft', 'proforma']
+#if record.state not in ['draft', 'validated']
 &lt;p&gt;Attached we send the invoice dated ${str(record.invoice_date)[8:]}-${str(record.invoice_date)[5:7]}-${str(record.invoice_date)[:4]} and number ${record.number}${record.description and ', concerning "'+record.description+'"' or ''}.&lt;/p&gt;
 #end
 
