@@ -608,14 +608,6 @@ msgstr ""
 "${record.state in ['draft','quotation'] and 'Pressupost' or 'Comanda'} "
 "${record.reference or record.party.name}"
 
-msgctxt "model:ir.ui.menu,name:menu_act_searching_invoice"
-msgid "Searching"
-msgstr "Cerca"
-
-msgctxt "model:ir.ui.menu,name:menu_act_searching_party"
-msgid "Searching"
-msgstr "Cerca"
-
 msgctxt "model:res.group,name:group_bank"
 msgid "Bank"
 msgstr "Banc"
