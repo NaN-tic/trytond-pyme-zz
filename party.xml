@@ -13,11 +13,5 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                 search="[('model.model', '=', 'party.party'), ('name', '=', 'lang')]"/>
             <field name="value" eval="'ir.lang,' + str(ref('ir.lang_es'))"/>
         </record>
-
-        <menuitem
-            id="menu_act_searching_party"
-            parent="party.menu_party"
-            action="searching.act_searching"
-            icon="tryton-find"/>
     </data>
 </tryton>
