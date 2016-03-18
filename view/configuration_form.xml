@@ -7,5 +7,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="default_customer_tax"/>
         <label name="default_supplier_tax"/>
         <field name="default_supplier_tax"/>
+        <label name="description_for_account_move_line"/>
+        <field name="description_for_account_move_line"/>
     </xpath>
 </data>
