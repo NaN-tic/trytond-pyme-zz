@@ -20,3 +20,13 @@ class AccountConfiguration(ModelSingleton, ModelSQL, ModelView):
         domain=[
             ('group.kind', 'in', ['purchase', 'both']),
             ]))
+    description_for_account_move_line = fields.Selection([
+            ('description', 'Invoice Description'),
+            ('reference', 'Invoice Reference'),
+            ('reference+description',
+                'Invoice Description Plus Reference'),
+            ], 'Default Description for Account Move')
+
+    @classmethod
+    def default_description_for_account_move_line(cls):
+        return 'invoice_description'
