@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -9,6 +9,10 @@ msgstr "Impuesto venta por defecto"
 msgctxt "field:account.configuration,default_supplier_tax:"
 msgid "Default Supplier Tax"
 msgstr "Impuesto compra por defecto"
+
+msgctxt "field:account.configuration,description_for_account_move_line:"
+msgid "Default Description for Account Move"
+msgstr "Descripción por defecto para asiento contable"
 
 msgctxt "field:company.employee,active:"
 msgid "Active"
@@ -232,7 +236,7 @@ msgid ""
 "<p>Dear Mr./Ms. ${record.invoice_address and record.invoice_address.name or ''},</p>\n"
 "\n"
 "#if record.state == 'draft'\n"
-"<p>Attached we send the requested quotation ${record.description and ' concerning \"'+record.description+'\"' or ''}.</p>\n"
+"<p>Attached we send the requested quotation${record.description and ' concerning \"'+record.description+'\"' or ''}.</p>\n"
 "#end\n"
 "#if record.state == 'quotation'\n"
 "<p>Attached we send the requested quotation${record.description and ' concerning \"'+record.description+'\"' or ''} with reference ${record.reference}.</p>\n"
@@ -611,6 +615,18 @@ msgstr ""
 msgctxt "model:res.group,name:group_bank"
 msgid "Bank"
 msgstr "Banco"
+
+msgctxt "selection:account.configuration,description_for_account_move_line:"
+msgid "Invoice Description"
+msgstr "Descripción de factura"
+
+msgctxt "selection:account.configuration,description_for_account_move_line:"
+msgid "Invoice Description Plus Reference"
+msgstr "Descripción de factura más referencia"
+
+msgctxt "selection:account.configuration,description_for_account_move_line:"
+msgid "Invoice Reference"
+msgstr "Referencia de factura"
 
 msgctxt "view:account.move:"
 msgid "Draft"
