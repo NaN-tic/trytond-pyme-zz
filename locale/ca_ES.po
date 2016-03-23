@@ -4,15 +4,15 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "field:account.configuration,default_customer_tax:"
 msgid "Default Customer Tax"
-msgstr "Impost venda per defecte"
+msgstr "Impost de venda per defecte"
 
 msgctxt "field:account.configuration,default_supplier_tax:"
 msgid "Default Supplier Tax"
-msgstr "Impost compra per defecte"
+msgstr "Impost de compra per defecte"
 
 msgctxt "field:account.configuration,description_for_account_move_line:"
-msgid "Default Description for Account Move"
-msgstr "Descripció per defecte per assentament comptable"
+msgid "Description for Invoice Account Move Line"
+msgstr "Descripció pels apunts de factures"
 
 msgctxt "field:company.employee,active:"
 msgid "Active"
@@ -622,7 +622,7 @@ msgstr "Descripció de factura"
 
 msgctxt "selection:account.configuration,description_for_account_move_line:"
 msgid "Invoice Description Plus Reference"
-msgstr "Descripció de factura més referència"
+msgstr "Descripció més referència de factura"
 
 msgctxt "selection:account.configuration,description_for_account_move_line:"
 msgid "Invoice Reference"

@@ -27,7 +27,7 @@ class AccountConfiguration(ModelSingleton, ModelSQL, ModelView):
             ('reference', 'Invoice Reference'),
             ('reference+description',
                 'Invoice Description Plus Reference'),
-            ], 'Default Description for Account Move')
+            ], 'Description for Invoice Account Move Line')
 
     @classmethod
     def default_description_for_account_move_line(cls):
