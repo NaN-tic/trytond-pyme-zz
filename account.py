@@ -13,11 +13,13 @@ class AccountConfiguration(ModelSingleton, ModelSQL, ModelView):
     default_customer_tax = fields.Property(
         fields.Many2One('account.tax', 'Default Customer Tax',
         domain=[
+            ('parent', '=', None),
             ('group.kind', 'in', ['sale', 'both']),
             ]))
     default_supplier_tax = fields.Property(
         fields.Many2One('account.tax', 'Default Supplier Tax',
         domain=[
+            ('parent', '=', None),
             ('group.kind', 'in', ['purchase', 'both']),
             ]))
     description_for_account_move_line = fields.Selection([
