@@ -75,7 +75,7 @@ class InvoiceLine:
         else:
             type_ = self.invoice_type
 
-        if type_ in ('in_invoice', 'in_credit_note'):
+        if type_ == 'in':
             if company and currency:
                 with Transaction().set_context(date=currency_date):
                     self.unit_price = Currency.compute(
