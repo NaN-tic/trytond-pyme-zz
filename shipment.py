@@ -6,10 +6,10 @@ from trytond.pyson import Eval, If, Equal
 
 __all__ = ['ShipmentIn', 'ShipmentInReturn', 'ShipmentInternal',
         'ShipmentOut', 'ShipmentOutReturn']
-__metaclass__ = PoolMeta
 
 
 class ShipmentIn:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.in'
 
     @classmethod
@@ -23,6 +23,7 @@ class ShipmentIn:
 
 
 class ShipmentInReturn:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.in.return'
 
     @classmethod
@@ -37,6 +38,7 @@ class ShipmentInReturn:
 
 
 class ShipmentInternal:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.internal'
 
     @classmethod
@@ -51,6 +53,7 @@ class ShipmentInternal:
 
 
 class ShipmentOut:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.out'
 
     @classmethod
@@ -65,6 +68,7 @@ class ShipmentOut:
 
 
 class ShipmentOutReturn:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.out.return'
 
     @classmethod

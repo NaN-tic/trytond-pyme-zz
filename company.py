@@ -5,10 +5,10 @@ from trytond.model import fields
 from trytond.pool import PoolMeta
 
 __all__ = ['Employee']
-__metaclass__ = PoolMeta
 
 
 class Employee:
+    __metaclass__ = PoolMeta
     __name__ = 'company.employee'
     active = fields.Boolean('Active', select=True)
 

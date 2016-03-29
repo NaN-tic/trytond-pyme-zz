@@ -5,10 +5,10 @@ from trytond.model import fields
 from trytond.pool import PoolMeta
 
 __all__ = ['TaxLine']
-__metaclass__ = PoolMeta
 
 
-class TaxLine():
+class TaxLine:
+    __metaclass__ = PoolMeta
     __name__ = 'account.tax.line'
 
     def on_change_tax(self):

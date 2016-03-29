@@ -5,10 +5,10 @@ from trytond.pool import PoolMeta
 from trytond.pyson import Eval, If, Equal
 
 __all__ = ['Sale']
-__metaclass__ = PoolMeta
 
 
 class Sale:
+    __metaclass__ = PoolMeta
     __name__ = 'sale.sale'
 
     @classmethod

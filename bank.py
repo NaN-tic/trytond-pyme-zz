@@ -5,10 +5,10 @@ from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
 __all__ = ['BankAccount']
-__metaclass__ = PoolMeta
 
 
 class BankAccount:
+    __metaclass__ = PoolMeta
     __name__ = 'bank.account'
 
     @staticmethod

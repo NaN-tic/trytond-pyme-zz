@@ -4,10 +4,10 @@
 from trytond.pool import Pool, PoolMeta
 
 __all__ = ['ProductTemplate']
-__metaclass__ = PoolMeta
 
 
 class ProductTemplate:
+    __metaclass__ = PoolMeta
     __name__ = 'product.template'
 
     @staticmethod

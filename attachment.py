@@ -6,10 +6,10 @@ from trytond.pool import PoolMeta
 from trytond.transaction import Transaction
 import os
 __all__ = ['Attachment']
-__metaclass__ = PoolMeta
 
 
 class Attachment:
+    __metaclass__ = PoolMeta
     __name__ = 'ir.attachment'
 
     @classmethod
