@@ -30,15 +30,15 @@ class Invoice:
         return move
 
     def _get_move_line(self, date, amount):
-        res = super(Invoice, self)._get_move_line(date, amount)
+        line = super(Invoice, self)._get_move_line(date, amount)
         config = Pool().get('account.configuration')(1)
         description = ''
         for field in config.description_for_account_move_line.split('+'):
             if description:
                 description += ' - '
             description += getattr(self, field, '') or ''
-        res['description'] = description
-        return res
+        line.description = description
+        return line
 
 
 class InvoiceLine:
