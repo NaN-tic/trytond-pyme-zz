@@ -12,10 +12,6 @@ class BankAccount:
     __name__ = 'bank.account'
 
     @staticmethod
-    def default_bank_country():
-        return 'ES'
-
-    @staticmethod
     def default_currency():
         Company = Pool().get('company.company')
         if Transaction().context.get('company'):
