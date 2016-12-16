@@ -4,7 +4,7 @@
 from trytond.model import fields
 from trytond.pool import PoolMeta
 
-__all__ = ['AccountConfiguration']
+__all__ = ['AccountConfiguration', 'TaxLine']
 
 
 class AccountConfiguration:
@@ -32,3 +32,16 @@ class AccountConfiguration:
     @classmethod
     def default_description_for_account_move_line(cls):
         return 'invoice_description'
+
+
+class TaxLine:
+    __metaclass__ = PoolMeta
+    __name__ = 'account.tax.line'
+
+    def on_change_tax(self):
+        super(TaxLine, self).on_change_tax()
+        self.code = None
+
+    @fields.depends('move_line')
+    def on_change_with_company(self, name=None):
+        return super(TaxLine, self).on_change_with_company(name)

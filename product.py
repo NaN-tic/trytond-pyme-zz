@@ -24,8 +24,6 @@ class ProductTemplate:
         customer_tax = Config(1).default_customer_tax
         if customer_tax:
             return [customer_tax.id]
-        else:
-            return []
 
     @staticmethod
     def default_supplier_taxes():
@@ -33,5 +31,3 @@ class ProductTemplate:
         supplier_tax = Config(1).default_supplier_tax
         if supplier_tax:
             return [supplier_tax.id]
-        else:
-            return []

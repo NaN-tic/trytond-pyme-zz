@@ -17,9 +17,9 @@ class Invoice:
     def view_attributes(cls):
         return super(Invoice, cls).view_attributes() + [
             ('/tree', 'colors',
-                If(Equal(Eval('state'), 'draft'), 'blue', 
-                If(Equal(Eval('state'), 'validated'), 'green', 
-                If(Equal(Eval('state'), 'posted'), 'brown', 
+                If(Equal(Eval('state'), 'draft'), 'blue',
+                If(Equal(Eval('state'), 'validated'), 'green',
+                If(Equal(Eval('state'), 'posted'), 'brown',
                 If(Equal(Eval('state'), 'cancel'), 'grey', 'black')))),
                 )]
 
@@ -60,6 +60,7 @@ class InvoiceLine:
         company = None
         if Transaction().context.get('company'):
             company = Company(Transaction().context['company'])
+
         currency = None
         currency_date = Date.today()
         if self.invoice and self.invoice.currency_date:

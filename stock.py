@@ -5,7 +5,7 @@ from trytond.pool import PoolMeta
 from trytond.pyson import Eval, If, Equal
 
 __all__ = ['ShipmentIn', 'ShipmentInReturn', 'ShipmentInternal',
-        'ShipmentOut', 'ShipmentOutReturn']
+        'ShipmentOut', 'ShipmentOutReturn', 'Move']
 
 
 class ShipmentIn:
@@ -78,4 +78,16 @@ class ShipmentOutReturn:
                 If(Equal(Eval('state'), 'draft'), 'blue',
                 If(Equal(Eval('state'), 'received'), 'darkgreen',
                 If(Equal(Eval('state'), 'cancel'), 'grey', 'black'))),
+                )]
+
+
+class Move:
+    __metaclass__ = PoolMeta
+    __name__ = 'stock.move'
+
+    @classmethod
+    def view_attributes(cls):
+        return super(Move, cls).view_attributes() + [
+            ('/tree', 'colors',
+                If(Equal(Eval('state'), 'draft'), 'blue', 'black'),
                 )]
