@@ -11,7 +11,7 @@ class ProductTemplate:
     __name__ = 'product.template'
 
     @staticmethod
-    def default_account_category():
+    def default_accounts_category():
         return True
 
     @staticmethod
