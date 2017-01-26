@@ -25,13 +25,13 @@ class AccountConfiguration:
     description_for_account_move_line = fields.Selection([
             ('description', 'Invoice Description'),
             ('reference', 'Invoice Reference'),
-            ('reference+description',
-                'Invoice Description Plus Reference'),
+            ('reference_description',
+                'Invoice Description and Reference'),
             ], 'Description for Invoice Account Move Line')
 
-    @classmethod
-    def default_description_for_account_move_line(cls):
-        return 'invoice_description'
+    @staticmethod
+    def default_description_for_account_move_line():
+        return 'reference_description'
 
 
 class TaxLine:
