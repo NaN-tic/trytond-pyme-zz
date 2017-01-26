@@ -27,8 +27,8 @@ msgid "Invoice Description"
 msgstr "Descripció de factura"
 
 msgctxt "selection:account.configuration,description_for_account_move_line:"
-msgid "Invoice Description Plus Reference"
-msgstr "Descripció més referència de factura"
+msgid "Invoice Description and Reference"
+msgstr "Descripció i referència de factura"
 
 msgctxt "selection:account.configuration,description_for_account_move_line:"
 msgid "Invoice Reference"
