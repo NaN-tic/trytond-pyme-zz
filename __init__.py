@@ -2,15 +2,15 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.pool import Pool
-import account
-import attachment
-import bank
-import company
-import invoice
-import product
-import purchase
-import sale
-import stock
+from . import account
+from . import attachment
+from . import bank
+from . import company
+from . import invoice
+from . import product
+from . import purchase
+from . import sale
+from . import stock
 
 def register():
     Pool.register(
@@ -23,7 +23,9 @@ def register():
         invoice.InvoiceLine,
         product.ProductTemplate,
         purchase.Purchase,
+        purchase.PurchaseLine,
         sale.Sale,
+        sale.SaleLine,
         stock.Move,
         stock.ShipmentIn,
         stock.ShipmentInReturn,
