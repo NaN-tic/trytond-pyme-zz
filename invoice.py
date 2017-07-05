@@ -96,3 +96,6 @@ class InvoiceLine:
 
         self.type = 'line'
         self.amount = self.on_change_with_amount()
+
+        if not self.product:
+            self.description = None

@@ -4,7 +4,7 @@
 from trytond.pool import PoolMeta
 from trytond.pyson import Eval, If, Equal
 
-__all__ = ['Sale']
+__all__ = ['Sale', 'SaleLine']
 
 
 class Sale:
@@ -22,3 +22,13 @@ class Sale:
                 If(Equal(Eval('invoice_state'), 'exception'), 'red',
                 If(Equal(Eval('state'), 'cancel'), 'grey', 'black')))))),
                 )]
+
+
+class SaleLine:
+    __metaclass__ = PoolMeta
+    __name__ = 'sale.line'
+
+    def on_change_product(self):
+        super(SaleLine, self).on_change_product()
+        if not self.product:
+            self.description = None
