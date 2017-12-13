@@ -7,11 +7,5 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="menu" ref="party.menu_category_list"/>
             <field name="group" ref="party.group_party_admin"/>
         </record>
-
-        <record model="ir.property" id="property_party_lang">
-            <field name="field"
-                search="[('model.model', '=', 'party.party'), ('name', '=', 'lang')]"/>
-            <field name="value" eval="'ir.lang,' + str(ref('ir.lang_es'))"/>
-        </record>
     </data>
 </tryton>

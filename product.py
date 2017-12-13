@@ -17,17 +17,3 @@ class ProductTemplate:
     @staticmethod
     def default_taxes_category():
         return True
-
-    @staticmethod
-    def default_customer_taxes():
-        Config = Pool().get('account.configuration')
-        customer_tax = Config(1).customer_tax
-        if customer_tax:
-            return [customer_tax.id]
-
-    @staticmethod
-    def default_supplier_taxes():
-        Config = Pool().get('account.configuration')
-        supplier_tax = Config(1).supplier_tax
-        if supplier_tax:
-            return [supplier_tax.id]

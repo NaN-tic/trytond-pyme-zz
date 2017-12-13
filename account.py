@@ -10,18 +10,6 @@ __all__ = ['AccountConfiguration', 'TaxLine']
 class AccountConfiguration:
     __metaclass__ = PoolMeta
     __name__ = 'account.configuration'
-    customer_tax = fields.Property(
-        fields.Many2One('account.tax', 'Default Customer Tax',
-        domain=[
-            ('parent', '=', None),
-            ('group.kind', 'in', ['sale', 'both']),
-            ]))
-    supplier_tax = fields.Property(
-        fields.Many2One('account.tax', 'Default Supplier Tax',
-        domain=[
-            ('parent', '=', None),
-            ('group.kind', 'in', ['purchase', 'both']),
-            ]))
     description_for_account_move_line = fields.Selection([
             ('description', 'Invoice Description'),
             ('reference', 'Invoice Reference'),
