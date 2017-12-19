@@ -2,7 +2,7 @@
 <!-- This file is part pyme module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/field[@name='tax_roundings']" position="after">
+    <xpath expr="/form/field[@name='tax_rounding']" position="after">
         <label name="description_for_account_move_line"/>
         <field name="description_for_account_move_line"/>
     </xpath>
