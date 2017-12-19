@@ -15,7 +15,6 @@ from . import stock
 def register():
     Pool.register(
         account.AccountConfiguration,
-        account.TaxLine,
         attachment.Attachment,
         bank.BankAccount,
         company.Employee,

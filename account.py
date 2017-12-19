@@ -20,16 +20,3 @@ class AccountConfiguration:
     @staticmethod
     def default_description_for_account_move_line():
         return 'reference_description'
-
-
-class TaxLine:
-    __metaclass__ = PoolMeta
-    __name__ = 'account.tax.line'
-
-    def on_change_tax(self):
-        super(TaxLine, self).on_change_tax()
-        self.code = None
-
-    @fields.depends('move_line')
-    def on_change_with_company(self, name=None):
-        return super(TaxLine, self).on_change_with_company(name)
