@@ -20,12 +20,16 @@ class Attachment:
         archives = []
         for attachment in attachments:
             archive = attachment.digest
+            if not archive:
+                continue
             collision = attachment.collision
             directory = os.path.join(base_path, archive[0:2], archive[2:4])
             if collision:
                 archive += '-' + str(collision)
             archives.append('%s/%s' % (directory, archive))
+
         super(Attachment, cls).delete(attachments)
+
         for archive in archives:
             if os.path.isfile(archive):
                 os.unlink(archive)
