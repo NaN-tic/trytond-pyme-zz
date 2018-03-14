@@ -19,7 +19,6 @@ def register():
         bank.BankAccount,
         company.Employee,
         invoice.Invoice,
-        invoice.InvoiceLine,
         product.ProductTemplate,
         purchase.Purchase,
         purchase.PurchaseLine,
