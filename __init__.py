@@ -20,14 +20,23 @@ def register():
         company.Employee,
         invoice.Invoice,
         product.ProductTemplate,
+        module='pyme', type_='model')
+    Pool.register(
         purchase.Purchase,
         purchase.PurchaseLine,
+        depends=['purchase'],
+        module='party_company', type_='model')
+    Pool.register(
         sale.Sale,
         sale.SaleLine,
+        depends=['sale'],
+        module='party_company', type_='model')
+    Pool.register(
         stock.Move,
         stock.ShipmentIn,
         stock.ShipmentInReturn,
         stock.ShipmentInternal,
         stock.ShipmentOut,
         stock.ShipmentOutReturn,
-        module='pyme', type_='model')
+        depends=['stock'],
+        module='party_company', type_='model')
