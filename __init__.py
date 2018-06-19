@@ -25,12 +25,12 @@ def register():
         purchase.Purchase,
         purchase.PurchaseLine,
         depends=['purchase'],
-        module='party_company', type_='model')
+        module='pyme', type_='model')
     Pool.register(
         sale.Sale,
         sale.SaleLine,
         depends=['sale'],
-        module='party_company', type_='model')
+        module='pyme', type_='model')
     Pool.register(
         stock.Move,
         stock.ShipmentIn,
@@ -39,4 +39,4 @@ def register():
         stock.ShipmentOut,
         stock.ShipmentOutReturn,
         depends=['stock'],
-        module='party_company', type_='model')
+        module='pyme', type_='model')
