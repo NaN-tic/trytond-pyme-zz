@@ -2,6 +2,7 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.pool import PoolMeta
+from trytond.model import fields
 from trytond.pyson import Eval, If, Equal
 
 __all__ = ['Sale', 'SaleLine']
@@ -10,6 +11,10 @@ __all__ = ['Sale', 'SaleLine']
 class Sale:
     __metaclass__ = PoolMeta
     __name__ = 'sale.sale'
+    email = fields.Function(fields.Char('E-mail'), 'get_email')
+
+    def get_email(self, name):
+        return self.party.email if self.party else None
 
     @classmethod
     def view_attributes(cls):

@@ -4,7 +4,6 @@
 from trytond.pool import PoolMeta, Pool
 from trytond.model import fields
 from trytond.pyson import Eval, If, Equal
-from trytond.transaction import Transaction
 
 __all__ = ['Invoice']
 
@@ -12,6 +11,10 @@ __all__ = ['Invoice']
 class Invoice:
     __metaclass__ = PoolMeta
     __name__ = 'account.invoice'
+    email = fields.Function(fields.Char('E-mail'), 'get_email')
+
+    def get_email(self, name):
+        return self.party.email if self.party else None
 
     @classmethod
     def view_attributes(cls):

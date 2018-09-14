@@ -2,6 +2,7 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.pool import PoolMeta
+from trytond.model import fields
 from trytond.pyson import Eval, If, Equal
 
 __all__ = ['ShipmentIn', 'ShipmentInReturn', 'ShipmentInternal',
@@ -11,6 +12,10 @@ __all__ = ['ShipmentIn', 'ShipmentInReturn', 'ShipmentInternal',
 class ShipmentIn:
     __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.in'
+    email = fields.Function(fields.Char('E-mail'), 'get_email')
+
+    def get_email(self, name):
+        return self.customer.email if self.customer else None
 
     @classmethod
     def view_attributes(cls):
@@ -55,6 +60,10 @@ class ShipmentInternal:
 class ShipmentOut:
     __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.out'
+    email = fields.Function(fields.Char('E-mail'), 'get_email')
+
+    def get_email(self, name):
+        return self.customer.email if self.customer else None
 
     @classmethod
     def view_attributes(cls):
