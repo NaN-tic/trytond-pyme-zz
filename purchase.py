@@ -8,29 +8,27 @@ from trytond.pyson import Eval, If, Equal
 __all__ = ['Purchase', 'PurchaseLine']
 
 
-class Purchase:
-    __metaclass__ = PoolMeta
+class Purchase(metaclass=PoolMeta):
     __name__ = 'purchase.purchase'
     email = fields.Function(fields.Char('E-mail'), 'get_email')
 
     def get_email(self, name):
         return self.party.email if self.party else None
 
-    @classmethod
-    def view_attributes(cls):
-        return super(Purchase, cls).view_attributes() + [
-            ('/tree', 'colors',
-                If(Equal(Eval('state'), 'draft'), 'blue',
-                If(Equal(Eval('state'), 'quotation'), 'darkgreen',
-                If(Equal(Eval('state'), 'confirmed'), 'brown',
-                If(Equal(Eval('shipment_state'), 'exception'), 'red',
-                If(Equal(Eval('invoice_state'), 'exception'), 'red',
-                If(Equal(Eval('state'), 'cancel'), 'grey', 'black')))))),
-                )]
+    # @classmethod
+    # def view_attributes(cls):
+    #     return super(Purchase, cls).view_attributes() + [
+    #         ('/tree', 'colors',
+    #             If(Equal(Eval('state'), 'draft'), 'blue',
+    #             If(Equal(Eval('state'), 'quotation'), 'darkgreen',
+    #             If(Equal(Eval('state'), 'confirmed'), 'brown',
+    #             If(Equal(Eval('shipment_state'), 'exception'), 'red',
+    #             If(Equal(Eval('invoice_state'), 'exception'), 'red',
+    #             If(Equal(Eval('state'), 'cancel'), 'grey', 'black')))))),
+    #             )]
 
 
-class PurchaseLine:
-    __metaclass__ = PoolMeta
+class PurchaseLine(metaclass=PoolMeta):
     __name__ = 'purchase.line'
 
     def on_change_product(self):

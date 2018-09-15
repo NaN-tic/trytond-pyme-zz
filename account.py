@@ -4,11 +4,10 @@
 from trytond.model import fields
 from trytond.pool import PoolMeta
 
-__all__ = ['AccountConfiguration', 'TaxLine']
+__all__ = ['AccountConfiguration']
 
 
-class AccountConfiguration:
-    __metaclass__ = PoolMeta
+class AccountConfiguration(metaclass=PoolMeta):
     __name__ = 'account.configuration'
     description_for_account_move_line = fields.Selection([
             ('description', 'Invoice Description'),

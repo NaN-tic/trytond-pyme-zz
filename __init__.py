@@ -7,7 +7,7 @@ from . import attachment
 from . import bank
 from . import company
 from . import invoice
-from . import product
+from . import module
 from . import purchase
 from . import sale
 from . import stock
@@ -19,7 +19,7 @@ def register():
         bank.BankAccount,
         company.Employee,
         invoice.Invoice,
-        product.ProductTemplate,
+        module.Module,
         module='pyme', type_='model')
     Pool.register(
         purchase.Purchase,
@@ -34,9 +34,9 @@ def register():
     Pool.register(
         stock.Move,
         stock.ShipmentIn,
-        stock.ShipmentInReturn,
-        stock.ShipmentInternal,
+        # stock.ShipmentInReturn,
+        # stock.ShipmentInternal,
         stock.ShipmentOut,
-        stock.ShipmentOutReturn,
+        # stock.ShipmentOutReturn,
         depends=['stock'],
         module='pyme', type_='model')

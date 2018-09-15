@@ -2,6 +2,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
+msgctxt "error:ir.module:"
+msgid ""
+"You cannot modify the state of a module since desktop client because this is a balanced server.\n"
+"Please, contact with your TIC provider in order to do it for you. Thank you."
+msgstr ""
+"No puede modificar el estado de un módulo desde el cliente de escritorio porque este es un servidor balanceado.\n"
+"Por favor, contacte con su proveedor de servicios TIC con la finalidad de que lo haga por usted. Gracias."
+
 msgctxt "field:account.configuration,default_customer_tax:"
 msgid "Default Customer Tax"
 msgstr "Impuesto de venta por defecto"

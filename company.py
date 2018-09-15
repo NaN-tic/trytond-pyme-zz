@@ -7,8 +7,7 @@ from trytond.pool import PoolMeta
 __all__ = ['Employee']
 
 
-class Employee:
-    __metaclass__ = PoolMeta
+class Employee(metaclass=PoolMeta):
     __name__ = 'company.employee'
     active = fields.Boolean('Active', select=True)
 
