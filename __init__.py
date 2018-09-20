@@ -21,6 +21,7 @@ def register():
         company.Employee,
         invoice.Invoice,
         invoice.InvoiceLine,
+        product.ProductCategory,
         product.ProductTemplate,
         purchase.Purchase,
         purchase.PurchaseLine,

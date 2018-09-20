@@ -2,13 +2,24 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.pool import Pool, PoolMeta
+from trytond.model import fields
 
-__all__ = ['ProductTemplate']
+__all__ = ['ProductCategory', 'ProductTemplate']
+
+
+class ProductCategory:
+    __name__ = 'product.category'
+    accounting = fields.Boolean('Accounting', select=True)
+
 
 
 class ProductTemplate:
     __metaclass__ = PoolMeta
     __name__ = 'product.template'
+    account_category_migration = fields.Many2One('product.category', 'Account Category',
+        domain=[
+            ('accounting', '=', True),
+            ])
 
     @staticmethod
     def default_accounts_category():
