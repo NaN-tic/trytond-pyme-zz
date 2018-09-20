@@ -24,6 +24,7 @@ def register():
         InvoiceLine,
         Move,
         TaxLine,
+        ProductCategory,
         ProductTemplate,
         Purchase,
         Sale,
