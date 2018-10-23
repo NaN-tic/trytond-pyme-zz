@@ -8,9 +8,9 @@ __all__ = ['ProductCategory', 'ProductTemplate']
 
 
 class ProductCategory:
+    __metaclass__ = PoolMeta
     __name__ = 'product.category'
     accounting = fields.Boolean('Accounting', select=True)
-
 
 
 class ProductTemplate:
