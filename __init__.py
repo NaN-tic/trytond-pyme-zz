@@ -10,6 +10,7 @@ from . import invoice
 from . import module
 from . import purchase
 from . import sale
+from . import statement
 from . import stock
 
 def register():
@@ -20,6 +21,10 @@ def register():
         company.Employee,
         invoice.Invoice,
         module.Module,
+        module='pyme', type_='model')
+    Pool.register(
+        statement.ImportStart,
+        depends=['account_bank_statement_es_csb43'],
         module='pyme', type_='model')
     Pool.register(
         purchase.Purchase,
