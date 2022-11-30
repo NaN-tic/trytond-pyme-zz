@@ -14,9 +14,9 @@ class Attachment(metaclass=PoolMeta):
 
     @classmethod
     def delete(cls, attachments):
-        cursor = Transaction().connection.cursor()
-        db_name = cursor.dbname
+        db_name = Transaction().database.name
         base_path = os.path.join(config_.get('database', 'path'), db_name)
+
         archives = []
         for attachment in attachments:
             archive = attachment.digest
